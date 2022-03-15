@@ -1,0 +1,103 @@
+#main{
+    position: relative;
+    width: 522px;
+    height: 321px;
+    background:#FBFBFB;
+}
+#quoteBlock{
+    position: absolute;
+    width: 480px;
+    height: 274px;
+    left: 20px;
+    top: 20px;
+    background: #FBFBFB;
+    border: 1px solid #74B4FF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 20px;
+}
+#profile{
+    display: flex;
+    flex-direction: row; 
+}
+img{
+    width: 60px;
+    height: 60px;
+    left: 40px;
+    top: 40px;
+
+    background: url(image.png);
+    border-radius: 30px;
+}
+#profileTextBlock{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+#profileFullName{
+    width: 96px;
+    height: 19px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    color: #000000;
+    margin-left: 20px;
+    margin-top: 14px;
+}
+#profileNick{
+    width: 40px;
+    height: 14px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #1364C2;
+    margin-left: 20px;
+    margin-top: -14px;
+
+}
+
+#quote{
+    width: 440px;
+    height: 130px;
+    border: 1px solid #E8E8E8;
+    padding-top: 8.94px;
+    padding-left: 10px;
+}
+#quoteText{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #000000;
+}
+#hints{
+    display: flex;
+    flex-direction: row;
+}
+.hintsText{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #808080;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+#hint_1{
+    width: 119px;
+    height: 14px;
+}
+#hint_2{
+    width: 244px;
+    height: 14px;
+    margin-left: 77px;
+}
