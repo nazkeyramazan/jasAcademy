@@ -35,7 +35,10 @@ img{
     margin-bottom: 20px;
 }
 #profileFullName{
-    width: 96px;
+    display:block;
+    white-space: nowrap;
+    width: 350px;
+    overflow: hidden;
     height: 19px;
     font-family: 'Roboto';
     font-style: normal;
@@ -46,6 +49,8 @@ img{
     color: #000000;
     margin-left: 20px;
     margin-top: 14px;
+    text-overflow: ellipsis;
+
 }
 #profileNick{
     width: 40px;
@@ -58,14 +63,12 @@ img{
     color: #1364C2;
     margin-left: 20px;
     margin-top: -14px;
-
 }
 
 #quote{
-    width: 440px;
+    width: 420px;
     height: 130px;
     border: 1px solid #E8E8E8;
-    padding-top: 8.94px;
     padding-left: 10px;
 }
 #quoteText{
@@ -100,4 +103,5 @@ img{
     width: 244px;
     height: 14px;
     margin-left: 77px;
+    text-align: right;
 }
