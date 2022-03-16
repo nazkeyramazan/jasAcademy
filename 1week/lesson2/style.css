@@ -1,0 +1,40 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 630px;
+  }
+  
+  td, th {
+    border: 1px solid #9b9595;
+    text-align: left;
+    padding: 8px;
+  }
+  td{
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  #itemName{
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+
+  .item{
+      width: 100px;
+  }
+
+  #id{
+      width: 30px;
+  }
+
+  #name{
+    max-width: 300px;
+    width: 300px;
+  }
