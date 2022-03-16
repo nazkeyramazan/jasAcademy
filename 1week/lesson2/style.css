@@ -21,7 +21,7 @@ table {
     white-space: nowrap;
   }
   tr:nth-child(odd) {
-    background-color: #F3F9FF;;
+    background-color: #F3F9FF;
   }
 
   #itemName{

@@ -1,0 +1,85 @@
+
+.App{
+    margin: 25px;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 630px;
+}
+
+td, th {
+    border: 1px solid #95979b;
+    text-align: left;
+    padding: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
+td{
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+tr:nth-child(odd) {
+    background-color: #F3F9FF;;
+}
+
+
+#itemName{
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item{
+    width: 100px;
+    background-color: #F2F2F2;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+#id{
+    width: 30px;
+}
+
+#name{
+    max-width: 300px;
+    width: 300px;
+}
+
+p{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.checkBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 15px;
+    margin-bottom: 8px;
+}
+#isExist{
+    margin-left: 35px;
+}
+#count, #price{
+    cursor: pointer;
+}
+
+
+.checkBoxGroup{
+    display: flex;
+    flex-direction: row;
+}

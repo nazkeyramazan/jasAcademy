@@ -8,7 +8,6 @@ const tableData = [
     { id: 7, name: 'Чехол Apple MM2Y3ZM MagSafe для Apple iPhone 12 Pro', price: '36 060 ₸', count: 100, instalment: false },
 ]
 
-let dataToRender = tableData;
 
 function toggleCheckbox(){
     if (document.getElementById('checkboxValue').checked) {
