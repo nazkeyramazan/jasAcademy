@@ -7,11 +7,7 @@ const tableData = [
     { id: 6, name: 'OEM 11199 для iPhone 11 черный', price: '1 200 ₸', count: 55, instalment: false },
     { id: 7, name: 'Чехол Apple MM2Y3ZM MagSafe для Apple iPhone 12 Pro', price: '36 060 ₸', count: 100, instalment: false },
 ]
-function convertToInt(data) {
-    for( let key in data ) {
-      console.log(data[key]);
-    }
-  }
+
 let dataToRender = tableData;
 
 function toggleCheckbox(){
@@ -62,12 +58,12 @@ function renderDataInTheTable(dataToRender) {
 let countBool = false;
 function sortByCount(){
     if(countBool == false){
-        dataToRender =  tableData.sort(function(a, b){return b.count - a.count});
+        dataToRender =  dataToRender.sort(function(a, b){return b.count - a.count});
         renderDataInTheTable(dataToRender);
         countBool = true;
     } else
     if(countBool == true){
-        dataToRender =  tableData.sort(function(a, b){return a.count - b.count});
+        dataToRender =  dataToRender.sort(function(a, b){return a.count - b.count});
         renderDataInTheTable(dataToRender);
         countBool = false;
     }
@@ -76,15 +72,14 @@ function sortByCount(){
 let priceBool = false;
 function sortByPrice(){
     if(priceBool == false){
-        dataToRender =  tableData.sort(function(a, b){return parseInt((b.price.replace(" ", "")), 10) - parseInt(a.price.replace(" ", ""), 10)});
+        dataToRender =  dataToRender.sort(function(a, b){return parseInt((b.price.replace(" ", "")), 10) - parseInt(a.price.replace(" ", ""), 10)});
         renderDataInTheTable(dataToRender);
         priceBool = true;
     } else
     if(priceBool == true){
-        dataToRender =  tableData.sort(function(a, b){return parseInt(a.price.replace(" ", ""), 10) - parseInt(b.price.replace(" ", ""), 10)});
+        dataToRender =  dataToRender.sort(function(a, b){return parseInt(a.price.replace(" ", ""), 10) - parseInt(b.price.replace(" ", ""), 10)});
         renderDataInTheTable(dataToRender);
         priceBool = false;
     }
 }
 renderDataInTheTable(dataToRender);
-convertToInt(tableData);
