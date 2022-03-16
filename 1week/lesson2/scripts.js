@@ -7,6 +7,12 @@ const tableData = [
     { id: 6, name: 'OEM 11199 для iPhone 11 черный', price: '1 200 ₸', count: 55, instalment: false },
     { id: 7, name: 'Чехол Apple MM2Y3ZM MagSafe для Apple iPhone 12 Pro', price: '36 060 ₸', count: 100, instalment: false },
 ]
+function convertToInt(data) {
+    for( let key in data ) {
+      console.log(data[key]);
+    }
+  }
+let dataToRender = tableData;
 
 function toggleCheckbox(){
     if (document.getElementById('checkboxValue').checked) {
@@ -70,14 +76,15 @@ function sortByCount(){
 let priceBool = false;
 function sortByPrice(){
     if(priceBool == false){
-        dataToRender =  tableData.sort(function(a, b){return parseInt((b.price), 10) - parseInt(a.price, 10)});
+        dataToRender =  tableData.sort(function(a, b){return parseInt((b.price.replace(" ", "")), 10) - parseInt(a.price.replace(" ", ""), 10)});
         renderDataInTheTable(dataToRender);
-        countBool = true;
+        priceBool = true;
     } else
     if(priceBool == true){
-        dataToRender =  tableData.sort(function(a, b){return parseInt(a.price, 10) - parseInt(b.price, 10)});
+        dataToRender =  tableData.sort(function(a, b){return parseInt(a.price.replace(" ", ""), 10) - parseInt(b.price.replace(" ", ""), 10)});
         renderDataInTheTable(dataToRender);
-        countBool = false;
+        priceBool = false;
     }
 }
 renderDataInTheTable(dataToRender);
+convertToInt(tableData);
