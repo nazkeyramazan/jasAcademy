@@ -8,10 +8,25 @@ const tableData = [
     { id: 7, name: 'Чехол Apple MM2Y3ZM MagSafe для Apple iPhone 12 Pro', price: '36 060 ₸', count: 100, instalment: false },
 ]
 
+function toggleCheckbox(){
+    if (document.getElementById('checkboxValue').checked) {
+        dataToRender =  tableData.filter(item=>item.instalment==false);
 
-function renderDataInTheTable(tableData) {
+    } else if (document.getElementById('checkboxValue').checked == false){
+        dataToRender = tableData;
+    }
+    renderDataInTheTable(dataToRender);
+
+}
+
+function renderDataInTheTable(dataToRender) {
     const mytable = document.getElementById("table");
-    tableData.forEach(item => {
+    var tableHeaderRowCount = 1;
+    var rowCount = table.rows.length;
+    for (let i = 1; i < rowCount; i++) {
+        table.deleteRow(tableHeaderRowCount);
+    }
+    dataToRender.forEach(item => {
         let newRow = document.createElement("tr");
         Object.values(item).forEach((itemValue) => {
             if(itemValue === false){
@@ -37,4 +52,32 @@ function renderDataInTheTable(tableData) {
         mytable.appendChild(newRow);
     });
 }
-renderDataInTheTable(tableData);
+
+let countBool = false;
+function sortByCount(){
+    if(countBool == false){
+        dataToRender =  tableData.sort(function(a, b){return b.count - a.count});
+        renderDataInTheTable(dataToRender);
+        countBool = true;
+    } else
+    if(countBool == true){
+        dataToRender =  tableData.sort(function(a, b){return a.count - b.count});
+        renderDataInTheTable(dataToRender);
+        countBool = false;
+    }
+}
+
+let priceBool = false;
+function sortByPrice(){
+    if(priceBool == false){
+        dataToRender =  tableData.sort(function(a, b){return parseInt((b.price), 10) - parseInt(a.price, 10)});
+        renderDataInTheTable(dataToRender);
+        countBool = true;
+    } else
+    if(priceBool == true){
+        dataToRender =  tableData.sort(function(a, b){return parseInt(a.price, 10) - parseInt(b.price, 10)});
+        renderDataInTheTable(dataToRender);
+        countBool = false;
+    }
+}
+renderDataInTheTable(dataToRender);

@@ -49,3 +49,24 @@ table {
     max-width: 300px;
     width: 300px;
   }
+
+  p{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  #checkBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 15px;
+    margin-bottom: 8px;
+  }
+
+  #count, #price{
+    cursor: pointer;
+  }

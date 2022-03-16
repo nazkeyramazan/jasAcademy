@@ -4,16 +4,18 @@
         <title> Table Native JS</title>
         <link rel="stylesheet" href="./style.css">
         <script src="./scripts.js" defer></script>
-        <script src="./data.js"></script>
     </head>
 
 <body>
+  <div id="checkBox" onchange="toggleCheckbox()">
+    <input type="checkbox" id="checkboxValue"> <p>Только в рассрочку</p>
+  </div>
     <table id="table">
         <tr>
           <th class="item" id="id">№</th>
           <th class="item" id="name">Name</th>
-          <th class="item">Price</th>
-          <th class="item">Count</th>
+          <th class="item" id="price" onclick="sortByPrice()">Price</th>
+          <th class="item" id="count" onclick="sortByCount()">Count</th>
           <th class="item">Instalment</th>
         </tr>
       </table>
