@@ -5,7 +5,7 @@ table {
   }
   
   td, th {
-    border: 1px solid #9b9595;
+    border: 1px solid #95979b;
     text-align: left;
     padding: 8px;
   }
@@ -15,8 +15,8 @@ table {
       text-overflow: ellipsis;
       white-space: nowrap;
   }
-  tr:nth-child(even) {
-    background-color: #dddddd;
+  tr:nth-child(odd) {
+    background-color: #F3F9FF;;
   }
 
   #itemName{
@@ -28,6 +28,7 @@ table {
 
   .item{
       width: 100px;
+      background-color: #F2F2F2;
   }
 
   #id{

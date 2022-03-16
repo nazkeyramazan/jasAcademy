@@ -16,7 +16,7 @@ function renderDataInTheTable(tableData) {
         Object.values(item).forEach((itemValue) => {
             if(itemValue === false){
                 let cell = document.createElement("td");
-                cell.innerText = '✔';
+                cell.innerText = '✅';
                 newRow.appendChild(cell);
             }else
             if(itemValue === true){
