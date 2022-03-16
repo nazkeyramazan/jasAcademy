@@ -1,38 +1,48 @@
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 630px;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 630px;
   }
   
   td, th {
     border: 1px solid #95979b;
     text-align: left;
     padding: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
   }
   td{
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   tr:nth-child(odd) {
     background-color: #F3F9FF;;
   }
 
   #itemName{
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .item{
-      width: 100px;
-      background-color: #F2F2F2;
+    width: 100px;
+    background-color: #F2F2F2;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
   }
 
   #id{
-      width: 30px;
+    width: 30px;
   }
 
   #name{

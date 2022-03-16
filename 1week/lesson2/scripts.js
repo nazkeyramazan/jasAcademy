@@ -22,6 +22,11 @@ function renderDataInTheTable(tableData) {
             if(itemValue === true){
                 let cell = document.createElement("td");
                 newRow.appendChild(cell);
+            }else
+            if(itemValue === 0){
+                let cell = document.createElement("td");
+                cell.innerText = 'Нет в наличии';
+                newRow.appendChild(cell);
             }
             else{
                 let cell = document.createElement("td");
