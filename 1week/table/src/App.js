@@ -49,7 +49,7 @@ function App() {
     return 1;
   })
 
-console.log(sortBy);
+console.log(data.length);
   
   return (
     <div className="App">
@@ -75,7 +75,7 @@ console.log(sortBy);
       </thead>
         <tbody>
         {data.map((item, index)=>(
-            <tr key={index}>
+            <tr key={index} className={data.length > 5 ? "orange" : "blue"} >
               <td id="id">{item.id}</td>
               <td id="name">{item.name}</td>
               <td id="price">{item.price}</td>

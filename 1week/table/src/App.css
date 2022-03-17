@@ -24,10 +24,13 @@ td{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-tr:nth-child(odd) {
+tr:nth-child(even).orange {
     background-color: #F3F9FF;;
 }
 
+tr:nth-child(even).blue {
+    background-color: #FFDDBD;
+}
 
 #itemName{
     max-width: 300px;
