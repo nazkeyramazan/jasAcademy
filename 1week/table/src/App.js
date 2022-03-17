@@ -8,9 +8,10 @@ function App() {
   const [isOnlyInstalment, setIsOnlyInstalment] = useState(false)
   const [isOnlyExists, setIsOnlyExists] = useState(false)
   const [sortBy, setSortBy] = useState()
-
+  const [isAscOrder, setIsAscOrder] = useState(false);
   
   function sortByColumn(columnName){
+    isAscOrder ? setIsAscOrder(false) :setIsAscOrder(true)
     setSortBy(columnName)
   }
 
@@ -33,10 +34,17 @@ function App() {
     return true;
   }).sort((a, b) => {
     if (sortBy) {
-      if (typeof a[sortBy] === 'string') {
-        return ('' + a[sortBy]).localeCompare(b[sortBy]);
+      if(isAscOrder){
+        if (typeof a[sortBy] === 'string') {
+          return ('' + a[sortBy]).localeCompare(b[sortBy]);
+        }
+        return a[sortBy] - b[sortBy]
+      } else{
+        if (typeof a[sortBy] === 'string') {
+          return ('' + b[sortBy]).localeCompare(a[sortBy]);
+        }
+        return b[sortBy] - a[sortBy]
       }
-      return a[sortBy] - b[sortBy]
     }
     return 1;
   })
