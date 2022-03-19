@@ -86,3 +86,12 @@ p{
     display: flex;
     flex-direction: row;
 }
+#newBlock{
+    margin: 50px;
+    background-color: aquamarine;
+}
+
+#numberInput{
+    height: 30px;
+    margin-top: 50px;
+}

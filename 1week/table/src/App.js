@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './App.css';
 import {tableData} from './data';
 
-
+let interval;
 function App() {
 
   const [isOnlyInstalment, setIsOnlyInstalment] = useState(false)
@@ -10,6 +10,10 @@ function App() {
   const [sortBy, setSortBy] = useState()
   const [isAscOrder, setIsAscOrder] = useState(false);
   
+  const [number, setNumber] = useState()
+  const [arr1, setArr] = useState([]);
+  const [factorialNumber, setFactorial] = useState()
+  const [countNumber, setCountNumber ] = useState()
   function sortByColumn(columnName){
     isAscOrder ? setIsAscOrder(false) :setIsAscOrder(true)
     setSortBy(columnName)
@@ -49,8 +53,53 @@ function App() {
     return 1;
   })
 
-console.log(data.length);
-  
+  function handleClick(event){
+    setNumber(event.target.value)
+    setCountNumber(event.target.value)
+
+    isEven(event.target.value)
+    fibonacci(event.target.value);
+    setFactorial(factorial(event.target.value));
+  }
+  function isEven(number){
+    if(number%2===0)
+      return true
+    return false  
+  }
+  function fibonacci(number){
+    let n1 = 0, n2 = 1, nextTerm;
+    let arr=[];
+    for (let i = 1; i <= number; i++) {
+        arr.push(n2);
+        nextTerm = n1 + n2;
+        n1 = n2;
+        n2 = nextTerm;
+    }
+    setArr(arr);
+  }
+  function factorial(number){
+      if(number < 0){
+        return
+      }
+      if(number === 0){
+        return 1
+      } 
+      if(number > 0){
+        return number*factorial(number-1)
+      }
+  }
+  function countDown(number){
+    let x = countNumber;
+    clearInterval(interval);
+    interval = setInterval(()=>{
+      setCountNumber(x)
+      x--;
+      if(x<0){
+        clearInterval(interval);
+      }
+    } , 1000)
+    
+  }
   return (
     <div className="App">
       <div className="checkBoxGroup">
@@ -86,6 +135,16 @@ console.log(data.length);
           </tbody>
 
       </table>
+
+      <div className='newBlock'>
+       <input type="number" id='numberInput' onChange={(event)=>handleClick(event)}/> 
+       <p>{isEven(number)? `${number} is even number`:`${number} is odd number`}</p>
+       <p>{`Fiboacci sequence for number ${number} is ${arr1} `}</p>
+       <p>{`Factorial number is ${factorialNumber}`}</p>
+       <button onClick={()=>countDown()}> Start count down </button>
+       <p>{`Count down ${countNumber}`}</p>
+
+      </div>
     </div>
   );
 }
