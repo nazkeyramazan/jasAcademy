@@ -1,0 +1,31 @@
+.comment_block {
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    max-width: 600px;
+    padding: 0 10px;
+}
+.avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+}
+.top {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+.date {
+    margin-left: auto;
+    font-size: 12px;
+    color: #9D9D9D;
+}
+.name {
+    font-size: 12px;
+    font-weight: bold;
+}
+.text {
+    margin-bottom: 16px;
+}

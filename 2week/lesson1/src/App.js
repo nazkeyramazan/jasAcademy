@@ -1,10 +1,12 @@
 import './App.css';
-
+import CommentBlock from './components/CommentBlock';
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <>
+      <CommentBlock />
+      <CommentBlock />
+      <CommentBlock />
+    </>
   );
 }
 
