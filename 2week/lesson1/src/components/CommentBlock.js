@@ -1,7 +1,6 @@
 import React from 'react'
 
 function CommentBlock({comment , depth=0}) {
-    console.log(comment);
     const date = new Date(comment.created);
     return (
         <div>

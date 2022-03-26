@@ -1,7 +1,10 @@
+.App{
+    width: 600px;
+}
 .comment_block {
     border: 1px solid #D7D7D7;
     border-radius: 4px;
-    max-width: 600px;
+    max-width: 100%;
     padding: 0 10px;
 }
 .avatar {
@@ -28,4 +31,69 @@
 }
 .text {
     margin-bottom: 16px;
+}
+
+
+.App{
+    margin: 25px;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 972px;
+}
+
+p{
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color: #7E7E7E;
+}
+
+.item{
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    color: #808080;
+    text-align: left;
+
+}
+
+#title{
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    color: #000000;
+}
+
+#songs{
+    margin-left: 50px;
+}
+
+.image{
+    width: 33.5px;
+    height: 33.5px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.nameBlock{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn{
+    font-family: 'Ubuntu Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: #7E7E7E;
+    width: 60px;
+    height: 20px;
+    border: 1px solid #7E7E7E;
+    box-sizing: border-box;
+    border-radius: 4px;
 }
