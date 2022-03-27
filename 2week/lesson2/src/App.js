@@ -2,8 +2,8 @@ import './App.css';
 import {Routes, Route} from 'react-router-dom'
 import Factorial from './components/Factorial';
 import Fibonacci from './components/Fibonacci';
-
-import Menu from './components/Menu';
+import MainPage from './components/MainPage';
+import MainMenu from './components/MainMenu';
 import { useState } from 'react';
 function App() {
 
@@ -15,16 +15,16 @@ function App() {
   
   return (
     <div className="App">
-      <Menu/>
-      <input type={'number'} onChange={(e)=>handleChange(e)}></input>
+      <MainMenu/>
       <Routes>
-        <Route path='/' element={<Fibonacci inputData={inputData}/>}></Route>
+        <Route path='fibonacci' element={<Fibonacci inputData={inputData}/>}></Route>
         <Route path='factorial' element={<Factorial inputData={inputData}/>}></Route>
-
         <Route path='*' element={'Error 404 page not found'}></Route>
+        <Route path='/' element={<MainPage/>}></Route>
 
       </Routes>    
-
+      <input type={'number'} onChange={(e)=>handleChange(e)}></input>
+      <h1>Введенное число: {inputData}</h1>
     </div>
   );
 }
