@@ -4,6 +4,7 @@ import Factorial from './components/Factorial';
 import Fibonacci from './components/Fibonacci';
 import MainPage from './components/MainPage';
 import MainMenu from './components/MainMenu';
+import { TextField } from '@mui/material';
 import { useState } from 'react';
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
         <Route path='/' element={<MainPage/>}></Route>
 
       </Routes>    
-      <input type={'number'} onChange={(e)=>handleChange(e)}></input>
+      <TextField id="standard-basic" label="" variant="standard" onChange={(e)=>handleChange(e)}/>
       <h1>Введенное число: {inputData}</h1>
     </div>
   );

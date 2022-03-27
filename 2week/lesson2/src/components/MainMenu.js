@@ -1,8 +1,4 @@
 import {Link} from 'react-router-dom'
-
-import Fibonacci from './Fibonacci';
-import Factorial from './Factorial';
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,11 +11,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
+import { useNavigate } from 'react-router-dom';
 const pages = ['Fibonacci', 'Factorial'];
 const settings = ['Profile', 'Account', 'Dashboard'];
 
 function MainMenu() {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -97,15 +94,15 @@ function MainMenu() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link to={page} style={{textDecoration:'none'}}>
+              // <Link to={page} style={{textDecoration:'none'}}>
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={()=>navigate(page)}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   {page}
                 </Button>
-              </Link>
+              // </Link>
             ))}
           </Box>
 
