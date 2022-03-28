@@ -1,5 +1,6 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
+import Movie from './components/Movie';
 function App() {
     const [data, setData] = useState([]);
     console.log(data);
@@ -8,13 +9,14 @@ function App() {
           .then(res => res.json())
           .then(
             (result) => {
-              setData(result);
+              setData(result.results);
             },
           )
       }, [])
  
   return (
     <div className="App">
+      <Movie data={data}/> 
       
     </div>
   );

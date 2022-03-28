@@ -1,0 +1,52 @@
+.App{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.title{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #FFFFFF;
+  text-align: left;
+  margin-left: 24px;
+  margin-bottom: 24px;
+  margin-top: 0px;
+  margin-right: 0px;
+}
+
+/* .genre{
+  width: 49px;
+  height: 16px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #0FEFFD;
+  margin-bottom: 21px;
+  text-align: left;
+} */
+
+.rate{
+  text-align: left;
+  margin-left: 24px;
+  color:#FFFFFF;
+}
+
+.poster{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: end;
+  background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%)
+}
+.image{
+  width: 250px;
+  height: 380px;
+  background-size: cover  ;
+}
