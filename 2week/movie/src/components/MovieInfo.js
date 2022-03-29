@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+// import React, {useEffect, useState} from 'react';
 import StarIcon from '@mui/icons-material/Star'; 
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 const URL = 'https://image.tmdb.org/t/p/original';
@@ -13,7 +14,7 @@ function MovieInfo({data}){
         let rate = [];
         
         for(let i=0; i<number-1; i++){
-           rate.push(<StarIcon color='inherit' style={{width:"13px", heigth:'13px'}}/>)
+           rate.push(<StarIcon color='inherit' key={i} style={{width:"13px", heigth:'13px'}}/>)
         }
         let x = number*10%10;
         if(x>=5){

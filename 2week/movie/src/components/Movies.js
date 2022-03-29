@@ -1,15 +1,14 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/Star'; 
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import { useNavigate } from 'react-router-dom';
-import MovieHeader from './MovieHeader';
 
 const URL = "https://image.tmdb.org/t/p/original/";
-function Movie({data}){
+function Movies({data}){
     const navigate = useNavigate();
-    
+
     function printStart(number){
         let rate = [];
         
@@ -22,11 +21,7 @@ function Movie({data}){
         }
         return rate
     }
-    return <div>
-        <MovieHeader/>
-        <div className='mainPageMovies'>
-        
-            {data.map((item, index)=>(
+    return data.map((item, index)=>(
                 <Box sx={{ flexGrow: 0.5}} onClick={()=>{navigate("/movies/"+item.id)}} key={index}>
                     <Grid 
                         container
@@ -49,10 +44,8 @@ function Movie({data}){
                         </Grid>
                     </Grid>
                 </Box>
-            ))}
-        </div>
-
-    </div>
+            ))
 }
 
-export default Movie;
+
+export default Movies;
