@@ -18,19 +18,26 @@
   margin-right: 0px;
 }
 
-/* .genre{
-  width: 49px;
-  height: 16px;
+.genre{
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   color: #0FEFFD;
+  margin: 0;
   margin-bottom: 21px;
   text-align: left;
-} */
+  display: flex;
+  
+}
 
+.genreBlock{
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+
+}
 .rate{
   text-align: left;
   margin-left: 24px;
@@ -68,6 +75,7 @@ p{
   font-size: 56px;
   margin: 0;
   line-height: 64px;
+  margin-bottom: 16px;
 }
 .movieOverview{
   font-size: 16px;

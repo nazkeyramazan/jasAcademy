@@ -33,7 +33,7 @@ function MoviesComponent(){
   useEffect(() => {
     fetchMovies()
     }, [])
-  return <div>
+  return <div className="App">
       <div className='header'>
           <p className='text' style={{color:'black', margin: '10px 0px'}}>Movies</p>
           <div className='query'>

@@ -5,7 +5,7 @@ import Movie from './components/Movie';
 function App() {
 
   return (
-    <div className="App">
+    <div >
       <Routes>
         <Route path="/" element={<MoviesComponent/>} />
         <Route path="movies/:id" element={<Movie/>} />

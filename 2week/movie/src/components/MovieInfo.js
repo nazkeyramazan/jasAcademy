@@ -26,10 +26,13 @@ function MovieInfo({data}){
         {/* {loading? */}
         <div className='posterImage'  style={{backgroundImage: `url(${URL}${data.backdrop_path})`}}>
         <div className='back'>
-            {/* {data.genres.map((item)=>(
-                <p>{item.name}</p>
-            ))} */}
+            
             <div className='movieInfo'>
+                <div className='genreBlock'>
+                    {data.genres?.map((item)=>(
+                        <p className='genre'>{item.name} <pre> </pre> </p>
+                    ))}
+                </div>    
                 <div className='stars'>
                     {printStar(data.vote_average)}
                 </div>
