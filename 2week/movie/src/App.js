@@ -1,5 +1,7 @@
 import './App.css';
+import { Routes, Route} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
+import Movies from './components/Movies';
 import Movie from './components/Movie';
 function App() {
     const [data, setData] = useState([]);
@@ -16,8 +18,10 @@ function App() {
  
   return (
     <div className="App">
-      <Movie data={data}/> 
-      
+      <Routes>
+        <Route path="/" element={<Movies data={data}/>} />
+        <Route path="movies/:id" element={<Movie/>} />
+      </Routes>
     </div>
   );
 }
