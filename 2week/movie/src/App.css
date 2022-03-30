@@ -136,17 +136,21 @@ p{
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content:space-between ;
 }
 
 .query{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .pagination{
   display: flex;
   justify-content: center;
   width:100%;
+}
+
+#outlined-basic{
+  height: 40px;
 }
