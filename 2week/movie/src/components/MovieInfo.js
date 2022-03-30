@@ -1,14 +1,8 @@
 import React from 'react';
-// import React, {useEffect, useState} from 'react';
 import StarIcon from '@mui/icons-material/Star'; 
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 const URL = 'https://image.tmdb.org/t/p/original';
 function MovieInfo({data}){
-    // const [loading, setLoading] = useState(false);
-    // useEffect((
-    //     setLoading(data)
-    // ),[data])
-    // console.log(loading);
 
     function printStar(number){
         let rate = [];
@@ -23,27 +17,24 @@ function MovieInfo({data}){
         return rate
     }
     return <>
-        {/* {loading? */}
         <div className='posterImage'  style={{backgroundImage: `url(${URL}${data.backdrop_path})`}}>
-        <div className='back'>
+            <div className='back'>
             
-            <div className='movieInfo'>
-                <div className='genreBlock'>
-                    {data.genres?.map((item)=>(
-                        <p className='genre'>{item.name} <pre> </pre> </p>
-                    ))}
-                </div>    
-                <div className='stars'>
-                    {printStar(data.vote_average)}
+                <div className='movieInfo'>
+                    <div className='genreBlock'>
+                        {data.genres?.map((item)=>(
+                            <p className='genre'>{item.name} <pre> </pre> </p>
+                        ))}
+                    </div>    
+                    <div className='stars'>
+                        {printStar(data.vote_average)}
+                    </div>
+                    <p className='movieTitle'>{data.original_title}</p>
+                    <p className='movieOverview'>{data.overview}</p>
                 </div>
-                <p className='movieTitle'>{data.original_title}</p>
-                <p className='movieOverview'>{data.overview}</p>
-            </div>
             
-        </div>     
+            </div>     
         </div>
-       
-        {/* : 'Loading'} */}
     </>
 }
 

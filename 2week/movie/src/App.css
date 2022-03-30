@@ -60,7 +60,7 @@
 }
 .posterImage{
   background-size: cover  ;
-  width: 1700px;
+  /* width: 1700px; */
   height: 648px;
 }
 p{
@@ -143,4 +143,10 @@ p{
 .query{
   display: flex;
   align-items: center;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  width:100%;
 }
