@@ -154,3 +154,44 @@ p{
 #outlined-basic{
   height: 40px;
 }
+
+.rickImage{
+  width: 229px;
+  height: 220px;
+  margin: 0px;
+  opacity: 1;
+  transition: opacity 0.5s ease 0s;
+  object-position: center center;
+  object-fit: cover;
+}
+
+.characterBlock{
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  height: 220px;
+  overflow: hidden;
+  background: rgb(60, 62, 68);
+  border-radius: 0.5rem;
+  margin: 0.75rem;
+  box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
+}
+
+.characterInfo{
+  background: rgb(32, 35, 41);
+  width: 100%;
+}
+
+.characterName{
+  font-size: 1.5rem;
+  margin: 0px 30px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-rendering: optimizeLegibility;
+  font: 112.5%/1.625 -apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+}
+
+.textGray{
+  margin: 0px 30px;
+  color: rgb(158, 158, 158);
+}
