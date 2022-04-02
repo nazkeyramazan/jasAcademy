@@ -8,9 +8,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom'
-
+import { useContext } from 'react';
+import { Auth } from '../context/Auth';
 export const Navbar = () => {
     const navigate = useNavigate()
+    const {token, setToken} = useContext(Auth)
 
     return (
         <AppBar position="static">
@@ -29,15 +31,43 @@ export const Navbar = () => {
                         >
                             Rick and Morty
                         </Button>
+                        
+                        
                     </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                    </Box>
+                    {token?
+                    (
+                    // <Box sx={{ flexGrow: 0 }}>
+                    //     <Tooltip title="Open settings">
+                    //         <IconButton sx={{ p: 0 }}>
+                    //             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    //         </IconButton>
+                    //     </Tooltip>
+                    // </Box>
+                        <Button 
+                            onClick={() => {setToken(false)}}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Выйти
+                        </Button>
+                    )
+                    :(
+                    <>
+                        <Button
+                            onClick={() => navigate('/signIn')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Sign In
+                        </Button>
+                        <Button
+                            onClick={() => navigate('/signUp')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Sign Up
+                        </Button>
+                    </>
+                    )
+                    }
+                    
                 </Toolbar>
             </Container>
         </AppBar>
