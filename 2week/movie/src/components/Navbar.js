@@ -29,6 +29,12 @@ export const Navbar = () => {
                             Rick and Morty
                         </Button>
                         
+                        <Button
+                            onClick={() => navigate('/counter')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Counter
+                        </Button>
                         
                     </Box>
                     {token?
