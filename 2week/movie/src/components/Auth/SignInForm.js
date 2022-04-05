@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {Auth} from "../context/Auth";
+import {Auth} from "../../context/Auth";
 import {Link, useNavigate} from 'react-router-dom';
 
 function SignInForm(){

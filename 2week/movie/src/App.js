@@ -1,15 +1,14 @@
 import './App.css';
 import React, {useState} from 'react';
 import { Routes, Route} from "react-router-dom";
-import MoviesComponent from './components/MoviesComponent';
-import Movie from './components/Movie';
+import MoviesComponent from './components/Movie/MoviesComponent';
+import Movie from './components/Movie/Movie';
 import { Navbar } from './components/Navbar';
 import RickAndMorty from './components/RickAndMorty/RickAndMorty';
 import SingleCharacter from './components/RickAndMorty/SingleCharacter';
-import SignIn from './components/SignIn';
 import { Auth } from './context/Auth';
-import SignInForm from './components/SignInForm';
-import SignUpForm from './components/SignUpForm';
+import SignInForm from './components/Auth/SignInForm';
+import SignUpForm from './components/Auth/SignUpForm';
 
 function App() {
 
@@ -18,7 +17,7 @@ function App() {
   return (
     <Auth.Provider value={{ token, setToken }}>
 
-      {/* {token?( */}
+      {token?(
         <div >
         <Navbar/>
         <Routes>
@@ -32,9 +31,12 @@ function App() {
           {/* <Route path="*" element={<Navigate to="/movie" replace />} /> */}
         </Routes>
       </div>
-      {/* ):
-      (<SignInForm/>)
-      } */}
+       ):
+       <Routes>
+          <Route path="*" element={<SignInForm/>} />
+          <Route path="/signUp/" element={<SignUpForm/>} />
+       </Routes>
+      } 
       
     </Auth.Provider>
   );
