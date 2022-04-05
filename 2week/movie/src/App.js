@@ -10,6 +10,7 @@ import { Auth } from './context/Auth';
 import SignInForm from './components/Auth/SignInForm';
 import SignUpForm from './components/Auth/SignUpForm';
 import Counter from './components/ClassComponents/Counter';
+import FunctionalCounter from './components/FunctionalComponent/Counter';
 
 function App() {
 
@@ -29,7 +30,8 @@ function App() {
           <Route path="/signIn/" element={<SignInForm/>} />
           <Route path="/signUp/" element={<SignUpForm/>} />
           <Route path="/counter/" element={<Counter/>} />
-
+          <Route path="/functionalCounter/" element={<FunctionalCounter/>} />
+          
           {/* <Route path="*" element={<Navigate to="/movie" replace />} /> */}
         </Routes>
       </div>

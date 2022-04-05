@@ -35,6 +35,12 @@ export const Navbar = () => {
                         >
                             Counter
                         </Button>
+                        <Button
+                            onClick={() => navigate('/functionalCounter')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            functionalCounter
+                        </Button>
                         
                     </Box>
                     {token?
