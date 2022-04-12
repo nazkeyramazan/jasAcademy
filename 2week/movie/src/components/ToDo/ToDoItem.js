@@ -29,12 +29,12 @@ function ToDoItem({onCreate}){
         })
     }
     return (
-        <>
-            <TextField inputRef={myRef} id="outlined-basic" onKeyDown={(e)=>keyDown(e)} value={todoItem?.value} label="Enter a toDo" onChange={(e)=>{setData(e)}} variant="outlined" />
-            <Button style={{height:'70px'}} variant="outlined" size="large" 
+        <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
+            <TextField style={{width:'400px'}} inputRef={myRef} id="outlined-basic" onKeyDown={(e)=>keyDown(e)} value={todoItem?.value} label="Enter a toDo" onChange={(e)=>{setData(e)}} variant="outlined" />
+            <Button style={{}} variant="outlined"  
                 onClick={() => createTodoItem()
-                }> create ToDo item </Button>
-        </>
+                }> create </Button>
+        </div>
     )
 }
 

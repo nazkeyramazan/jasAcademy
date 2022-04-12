@@ -17,7 +17,7 @@ function ToDo(){
         setTodos(newTodos)
     }
     return (
-        <div style={{margin:'50px', alignItems:'center'}}>
+        <div style={{margin:'50px', alignItems:'center', width:'500px'}}>
             <ToDoItem onCreate={createTodoItem}></ToDoItem>
             <ToDoList todos={todos} deleteItem={deleteItem}></ToDoList>
         </div>

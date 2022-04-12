@@ -7,7 +7,7 @@ function ToDoList({todos, deleteItem}){
     return (
         todos ? (
             todos.map((item, index)=>(
-                    <div key={index} style={{display:'flex', flexDirection:'row', justifyContent: 'flex-start', alignItems:'flex-start'}}>
+                    <div key={index} style={{display:'flex', flexDirection:'row', justifyContent: 'center', alignItems:'center'}}>
                         <ListItem>
                             <ListItemText primary={item.value} secondary={item.data} />
                         </ListItem>
