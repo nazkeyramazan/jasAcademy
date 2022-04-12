@@ -47,6 +47,13 @@ export const Navbar = () => {
                         >
                             BinarySearch
                         </Button>
+                        <Button
+                            onClick={() => navigate('/todo')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            ToDo
+                        </Button>
+
                         
                     </Box>
                     {token?

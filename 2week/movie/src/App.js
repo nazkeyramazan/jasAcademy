@@ -12,6 +12,7 @@ import SignUpForm from './components/Auth/SignUpForm';
 import Counter from './components/ClassComponents/Counter';
 import FunctionalCounter from './components/FunctionalComponent/Counter';
 import BinarySearch from './components/binarySearch';
+import ToDo from './components/ToDo/ToDo';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/counter/" element={<Counter/>} />
           <Route path="/functionalCounter/" element={<FunctionalCounter/>} />
           <Route path="/BinarySearch/" element={<BinarySearch/>} />
+          <Route path="/todo/" element={<ToDo/>} />
           
           {/* <Route path="*" element={<Navigate to="/movie" replace />} /> */}
         </Routes>
