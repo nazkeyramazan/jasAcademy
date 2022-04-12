@@ -29,6 +29,31 @@ export const Navbar = () => {
                             Rick and Morty
                         </Button>
                         
+                        <Button
+                            onClick={() => navigate('/counter')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Counter
+                        </Button>
+                        <Button
+                            onClick={() => navigate('/functionalCounter')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            functionalCounter
+                        </Button>
+                        <Button
+                            onClick={() => navigate('/BinarySearch')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            BinarySearch
+                        </Button>
+                        <Button
+                            onClick={() => navigate('/todo')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            ToDo
+                        </Button>
+
                         
                     </Box>
                     {token?
