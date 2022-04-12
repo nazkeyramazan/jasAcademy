@@ -41,6 +41,12 @@ export const Navbar = () => {
                         >
                             functionalCounter
                         </Button>
+                        <Button
+                            onClick={() => navigate('/BinarySearch')}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            BinarySearch
+                        </Button>
                         
                     </Box>
                     {token?
