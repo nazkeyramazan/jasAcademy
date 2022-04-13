@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import ToDoItem from "./ToDoItem";
 import ToDoList from "./ToDoList";
 
@@ -8,18 +8,33 @@ function ToDo(){
     useEffect(()=>{
         localStorage.setItem('todos' ,JSON.stringify(todos))
     }, [todos])
-    function createTodoItem(todo){
+
+    const createTodoItem = useCallback((todo)=>{
         setTodos(prev=>[...prev, todo])
-    }
+    })
+
     function deleteItem(index){
         const newTodos = [...todos]
         newTodos.splice(index, 1)
         setTodos(newTodos)
     }
+
+    function todoDone(index){
+        const newTodos = todos.map((item, indexx)=>{
+            if(indexx === index){
+                item.checked = !item.checked
+                return item;
+            }
+            return item
+        }
+        )
+        setTodos(newTodos)
+
+    }
     return (
-        <div style={{margin:'50px', alignItems:'center', width:'500px'}}>
+        <div style={{margin:'50px', alignItems:'center', width:'500px', backgroundColor:'bisque', padding:'25px'}}>
             <ToDoItem onCreate={createTodoItem}></ToDoItem>
-            <ToDoList todos={todos} deleteItem={deleteItem}></ToDoList>
+            <ToDoList todos={todos} todoDone={todoDone} deleteItem={deleteItem}></ToDoList>
         </div>
     )
 }

@@ -8,12 +8,17 @@ function ToDoItem({onCreate}){
 
     const [todoItem, setTodoItem] = useState('')
     const myRef = useRef(null);
+    
     function createTodoItem(){
         myRef.current.focus()
-        setTodoItem({
-            value: ''}
-        );
-        onCreate(todoItem);
+        if(todoItem?.value.length > 3){
+            setTodoItem({
+                value: ''}
+            );
+            onCreate(todoItem);
+        } else{
+            alert("ToDo length must be more than 3")
+        }
        
     }
     function keyDown(e){
@@ -25,7 +30,8 @@ function ToDoItem({onCreate}){
         var localeData = dNow.getDate() + '.'+(dNow.getMonth()+1) + '.'+ dNow.getFullYear() + ' '+ dNow.getHours() + ':'+ dNow.getMinutes();
         setTodoItem({
             value: e.target.value,
-            data: localeData
+            data: localeData,
+            checked: false
         })
     }
     return (
