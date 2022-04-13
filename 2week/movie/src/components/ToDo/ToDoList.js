@@ -1,18 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItem } from "@mui/material";
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Checkbox from '@mui/material/Checkbox';
 
-function ToDoList({todos, deleteItem}){
+function ToDoList({todos, deleteItem, todoDone}){
+
     return (
         todos ? (
-            todos.map((item, index)=>(
-                    <div key={index} style={{display:'flex', flexDirection:'row', justifyContent: 'flex-start', alignItems:'flex-start'}}>
+            todos.sort((a , b)=>{return a.data.localeCompare(b.data)})
+                  .sort((a , b)=>{return Number(a.checked) - Number(b.checked)})
+                   .map((item, index)=>(
+                    <div key={index} className={item.checked ? 'listItemDefault' : 'listItemDone'} style={{}}>
                         <ListItem>
-                            <ListItemText primary={item.value} secondary={item.data} />
+                            <ListItemButton role={undefined} onClick={()=>todoDone(index)} dense>
+
+                                <ListItemIcon>
+                                    <Checkbox
+                                        edge="start"
+                                        checked={item.checked}
+                                        tabIndex={-1}
+                                        disableRipple
+                                    />
+                                </ListItemIcon>
+                                <ListItemText className={item.checked?'lined':'none'} primary={item.value} secondary={item.data} />
+                            </ListItemButton>
+
                         </ListItem>
                         <Button
-                            variant="outlined" 
+                            variant="outlined"
+                            style={{marginRight:'15px'}} 
                             onClick={() => deleteItem(index)}
                             > Delete </Button>
                     </div>

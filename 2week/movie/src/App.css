@@ -152,7 +152,7 @@ p{
 }
 
 #outlined-basic{
-  height: 40px;
+  /* height: 40px; */
 }
 
 .rickImage{
@@ -203,3 +203,27 @@ p{
   margin-top: 25px;
 }
 
+.listItemDefault{
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items:center;
+  margin-top: 15px;
+  background-color:tan;
+}
+.listItemDone{
+  display:flex;
+  flex-direction:row;
+  justify-content:  center;
+  align-items: center;
+  background-color:antiquewhite ;
+  margin-top: 15px;
+}
+
+.none{
+
+}
+
+.lined{
+  text-decoration: line-through;
+}

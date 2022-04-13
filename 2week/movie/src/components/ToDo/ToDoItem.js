@@ -8,12 +8,17 @@ function ToDoItem({onCreate}){
 
     const [todoItem, setTodoItem] = useState('')
     const myRef = useRef(null);
+    
     function createTodoItem(){
         myRef.current.focus()
-        setTodoItem({
-            value: ''}
-        );
-        onCreate(todoItem);
+        if(todoItem?.value.length > 3){
+            setTodoItem({
+                value: ''}
+            );
+            onCreate(todoItem);
+        } else{
+            alert("ToDo length must be more than 3")
+        }
        
     }
     function keyDown(e){
@@ -25,16 +30,17 @@ function ToDoItem({onCreate}){
         var localeData = dNow.getDate() + '.'+(dNow.getMonth()+1) + '.'+ dNow.getFullYear() + ' '+ dNow.getHours() + ':'+ dNow.getMinutes();
         setTodoItem({
             value: e.target.value,
-            data: localeData
+            data: localeData,
+            checked: false
         })
     }
     return (
-        <>
-            <TextField inputRef={myRef} id="outlined-basic" onKeyDown={(e)=>keyDown(e)} value={todoItem?.value} label="Enter a toDo" onChange={(e)=>{setData(e)}} variant="outlined" />
-            <Button style={{height:'70px'}} variant="outlined" size="large" 
+        <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
+            <TextField style={{width:'400px'}} inputRef={myRef} id="outlined-basic" onKeyDown={(e)=>keyDown(e)} value={todoItem?.value} label="Enter a toDo" onChange={(e)=>{setData(e)}} variant="outlined" />
+            <Button style={{}} variant="outlined"  
                 onClick={() => createTodoItem()
-                }> create ToDo item </Button>
-        </>
+                }> create </Button>
+        </div>
     )
 }
 
