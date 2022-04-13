@@ -10,7 +10,9 @@ function ToDoList({todos, deleteItem, todoDone}){
 
     return (
         todos ? (
-            todos.map((item, index)=>(
+            todos.sort((a , b)=>{return a.data.localeCompare(b.data)})
+                  .sort((a , b)=>{return Number(a.checked) - Number(b.checked)})
+                   .map((item, index)=>(
                     <div key={index} className={item.checked ? 'listItemDefault' : 'listItemDone'} style={{}}>
                         <ListItem>
                             <ListItemButton role={undefined} onClick={()=>todoDone(index)} dense>
