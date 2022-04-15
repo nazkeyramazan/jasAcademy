@@ -1,41 +1,51 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useMemo} from "react";
 import ToDoItem from "./ToDoItem";
 import ToDoList from "./ToDoList";
-
+import { useSelector, useDispatch  } from 'react-redux'
 function ToDo(){
 
-    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')|| '[]'))
-    useEffect(()=>{
-        localStorage.setItem('todos' ,JSON.stringify(todos))
+    const todos = useSelector((state)=>(state.todos))
+    const dispatch = useDispatch()
+    
+    const todoList = useMemo(() => {
+        return todos.sort((a , b)=>{return a.data.localeCompare(b.data)})
+                    .filter((todo)=>{return todo.checked === false})
+    }, [todos])
+
+    const todoListDone = useMemo(() => {
+        return todos.sort((a , b)=>{return a.data.localeCompare(b.data)})
+                    .filter((todo)=>{return todo.checked === true})
     }, [todos])
 
     const createTodoItem = useCallback((todo)=>{
-        setTodos(prev=>[...prev, todo])
-    })
+        dispatch({type: 'todos/add', payload: todo})
+    }, [dispatch])
 
-    function deleteItem(index){
-        const newTodos = [...todos]
-        newTodos.splice(index, 1)
-        setTodos(newTodos)
-    }
+    const deleteItem = useCallback((id)=>{
+        dispatch({type: 'todos/delete', payload: id})
+    }, [dispatch])
 
-    function todoDone(index){
-        const newTodos = todos.map((item, indexx)=>{
-            if(indexx === index){
-                item.checked = !item.checked
-                return item;
-            }
-            return item
-        }
-        )
-        setTodos(newTodos)
 
-    }
+    const todoDone = useCallback((id)=>{
+        dispatch({
+            type: 'todos/doneChange', payload: id
+        })
+    }, [dispatch])
     return (
-        <div style={{margin:'50px', alignItems:'center', width:'500px', backgroundColor:'bisque', padding:'25px'}}>
-            <ToDoItem onCreate={createTodoItem}></ToDoItem>
-            <ToDoList todos={todos} todoDone={todoDone} deleteItem={deleteItem}></ToDoList>
-        </div>
+        <div>
+            <div style={{margin:'50px', alignItems:'center', width:'500px', backgroundColor:'bisque', padding:'25px'}}>
+                <ToDoItem onCreate={createTodoItem}></ToDoItem>
+            </div>
+
+            <div style={{display: "flex", flexDirection: 'row', justifyContent:'space-around', alignItems: 'flex-start'}}>
+                <div>
+                    <ToDoList  todos={todoList} todoDone={todoDone} deleteItem={deleteItem}></ToDoList>
+                </div>
+                <div>
+                    <ToDoList  todos={todoListDone} todoDone={todoDone} deleteItem={deleteItem}></ToDoList>
+                </div>
+            </div>           
+        </div>           
     )
 }
 
