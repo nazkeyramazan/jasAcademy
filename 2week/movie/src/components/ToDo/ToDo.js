@@ -4,7 +4,7 @@ import ToDoList from "./ToDoList";
 import { useSelector, useDispatch  } from 'react-redux'
 function ToDo(){
 
-    const todos = useSelector((state)=>(state.todos))
+    const todos = useSelector((state)=>(state.todosReducer.todos))
     const dispatch = useDispatch()
     
     const todoList = useMemo(() => {

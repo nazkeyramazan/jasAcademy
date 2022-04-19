@@ -5,7 +5,7 @@ import SimilarMovies from './SimilarMovies';
 import {useSelector, useDispatch} from 'react-redux';
 function Movie(){
     // const [data, setData] = useState([]);
-    const movies = useSelector((state)=>(state.movies))
+    const movies = useSelector((state)=>(state.moviesReducer.movies))
     const dispatch = useDispatch();
     const params = useParams();
     const setMovies = useCallback((movies)=>{

@@ -10,45 +10,34 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FormHelperText from '@mui/material/FormHelperText';
 import {useSelector, useDispatch} from 'react-redux';
-
+import {fetchMovies} from '../../app/actions/fetchMovies';
 function MoviesComponent(){
-  const movies = useSelector((state)=>(state.movies))
   const dispatch = useDispatch()
-  // const [data, setData] = useState([]);
-  const [query, setQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(500);
-  const [sortBy, setSortBy] = useState('popularity');
+
+  const movies = useSelector((state)=>state.moviesReducer.movies)
+  const sortBy = useSelector((state)=>state.moviesReducer.sortBy);
+  const totalPage = useSelector((state)=>state.moviesReducer.totalPage); 
+  const currentPage = useSelector((state)=>state.moviesReducer.currentPage); 
+  const query = useSelector((state)=>state.moviesReducer.query); 
+  
+  useEffect(() => {
+    dispatch(fetchMovies())
+    }, [dispatch])
+
+  const setSortBy = useCallback((payload)=>{
+    dispatch({type:'movies/setSortBy', payload})
+  }, [dispatch])
+  const setQuery = useCallback((payload)=>{
+    dispatch({type:'movies/setQuery', payload})
+  }, [dispatch])
+  const setCurrentPage = useCallback((payload)=>{
+    dispatch({type:'movies/setCurrentPage', payload})
+  }, [dispatch])
+  const searchMovies = useCallback(({currentPage = 1, sortBy = 'popularity'} = {}) => {
+    dispatch(fetchMovies({ currentPage, sortBy, query }))
+}, [dispatch, query, sortBy])
 
   
-  const setMovies = useCallback((movies)=>{
-    dispatch({type: 'movies/set', payload: movies})
-  }, [dispatch])
-
-  function fetchMovies(){
-    if(query !== '' || query.length>1  ){
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=d65708ab6862fb68c7b1f70252b5d91c&language=ru-RU&sort_by=${sortBy}.desc&page=${currentPage}&include_adult=false&query=${query}`)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            setMovies(result.results);
-            setTotalPage(Math.min(result.total_pages, 500))
-          },
-        )
-    }else{
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d65708ab6862fb68c7b1f70252b5d91c&language=ru-RU&sort_by=${sortBy}.desc&include_adult=false&include_video=false&page=${currentPage}&with_watch_monetization_types=flatrate`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setMovies(result.results);
-          setTotalPage(Math.min(result.total_pages, 500))
-        },
-      )
-    }
-  }
-  useEffect(() => {
-    fetchMovies()
-    }, [currentPage , sortBy])
 
   return <div className="App">
           <div className='header'>
@@ -62,7 +51,10 @@ function MoviesComponent(){
                       id="demo-simple-select"
                       value={sortBy}
                       label="Sort"
-                      onChange={(e)=>setSortBy(e.target.value)}
+                      onChange={(e)=>{
+                        setSortBy(e.target.value);
+                        searchMovies({ sortBy: e.target.value })
+                      }}
                     >
                       <MenuItem value={'popularity'}>Popularity</MenuItem>
                       <MenuItem value={'vote_average'}>Rate</MenuItem>
@@ -72,7 +64,7 @@ function MoviesComponent(){
                   </FormControl>
                 </Box>
                   <TextField id="outlined-basic" size="small" onChange={(e)=>setQuery(e.target.value)} label="" variant="outlined" />
-                  <Button variant="contained" size="large" style={{height:'55px'}} onClick={fetchMovies}>Поиск</Button>
+                  <Button variant="contained" size="large" style={{height:'55px'}} onClick={()=>searchMovies()}>Поиск</Button>
               </div>
           </div>
 
@@ -80,7 +72,10 @@ function MoviesComponent(){
               <Movies data={movies}/>
           </div>
           <div className='pagination'>
-            <Pagination count={totalPage} color="primary"  onChange={(event, value)=> setCurrentPage(value)} showFirstButton showLastButton  />
+            <Pagination count={totalPage} color="primary" page={currentPage} onChange={(event, value)=> {
+                        setCurrentPage(value);
+                        searchMovies({ currentPage: value })
+                      }} showFirstButton showLastButton  />
           </div>
       </div>
   }
