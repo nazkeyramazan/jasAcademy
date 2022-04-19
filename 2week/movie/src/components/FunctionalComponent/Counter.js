@@ -15,7 +15,7 @@ function FunctionalCounter() {
 
     const counterI = useCallback(()=>{
         dispatch({type: 'counter/increase'})
-    }, dispatch)
+    }, [dispatch])
     const counterD = useCallback(()=>{
         dispatch({type: 'counter/decrease'})
     }, [dispatch])
