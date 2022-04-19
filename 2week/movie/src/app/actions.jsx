@@ -18,3 +18,19 @@ export const doneTodo = function(id){
         id
     }
 }
+
+export const setMovies = function(movies){
+    return {
+        type: 'movies/set',
+        movies
+    }
+}
+
+export const setRickAndMorty = function(data){
+    return {
+        type: 'rickAndMorty/set',
+        data
+    }
+}
+
+// export const 

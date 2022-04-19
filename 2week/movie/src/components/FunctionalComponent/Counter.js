@@ -1,14 +1,24 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import {useSelector, useDispatch} from 'react-redux';
 
 function FunctionalCounter() {
-    let [counter, setCounter] = useState(20);
+    let counter = useSelector((state)=>state.counter);
+    const dispatch = useDispatch();
+    // let [counter, setCounter] = useState(20);
     const [arr] = useState([1 , 2 , 4 , 75 , 25])
     const [value, setValue] = useState(null);
     const [decimal, setDecimal] = useState('');
     const [binary, setBinary] = useState('');
     const interval = useRef();
+
+    const counterI = useCallback(()=>{
+        dispatch({type: 'counter/increase'})
+    }, dispatch)
+    const counterD = useCallback(()=>{
+        dispatch({type: 'counter/decrease'})
+    }, [dispatch])
     useEffect(()=>{
         return () => {
             clearTimeout(interval.current);
@@ -17,7 +27,7 @@ function FunctionalCounter() {
     const startCountDown = () => {
         if(counter>0){
             interval.current = setTimeout(()=>{
-                setCounter((prev) => prev - 1);
+                counterD();
                 counter--;
 
                 startCountDown()
@@ -30,11 +40,11 @@ function FunctionalCounter() {
     }
     function increaseCounter(){
         clearTimeout(interval.current);
-        setCounter(counter+1);
+        counterI();
     }
     function decreaseCounter(){
         clearTimeout(interval.current);
-        setCounter(counter-1);
+        counterD();
     }
     let newV = value;
 
