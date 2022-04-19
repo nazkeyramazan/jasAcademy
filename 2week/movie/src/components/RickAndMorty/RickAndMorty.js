@@ -4,27 +4,24 @@ import Grid from '@mui/material/Grid';
 import { useNavigate } from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
 import {useSelector, useDispatch} from 'react-redux';
-
+import {fetchRickAndMorty} from '../../app/actions/fetchRickAndMorty'
 function RickAndMorty(){
     // const [data, setData] = useState([]);
-    const rickAndMorty = useSelector((state)=>state.rickAndMorty)
-    const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState(1);
+    const rickAndMorty = useSelector((state)=>state.rickAndMortyReducer.rickAndMorty)
+    const currentPage = useSelector((state)=>state.rickAndMortyReducer.currentPage);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const setRickAndMorty = useCallback((data)=>{
-        dispatch({type: 'rickAndMorty/set', payload:data})
+    
+    const setCurrentPage = useCallback((currentPage)=>{
+        dispatch({type:'rickAndMorty/setCurrentPage', payload: currentPage})
     }, [dispatch])
-
-    useEffect(()=>{
-      fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-            setRickAndMorty(result.results);
-        },
-      )
-    },[currentPage]);
+    const searchMovies = useCallback((value) => {
+        dispatch(fetchRickAndMorty({ currentPage:value }))
+    }, [dispatch, currentPage])
+    useEffect(() => {
+        dispatch(fetchRickAndMorty())
+        }, [dispatch])
     return <div className="App">
         {
             rickAndMorty.map((item, index)=>(
@@ -60,7 +57,10 @@ function RickAndMorty(){
             ))
         }
         <div className='pagination'>
-            <Pagination count={42} color="primary"  onChange={(event, value)=> setCurrentPage(value)} showFirstButton showLastButton  />
+            <Pagination count={42} color="primary"  onChange={(event, value)=> {
+                setCurrentPage(value)
+                searchMovies(value)
+                }} showFirstButton showLastButton  />
           </div>
     </div>
 }
