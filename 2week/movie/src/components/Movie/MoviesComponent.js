@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Movies from './Movies'
@@ -9,20 +9,29 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FormHelperText from '@mui/material/FormHelperText';
+import {useSelector, useDispatch} from 'react-redux';
 
 function MoviesComponent(){
-  const [data, setData] = useState([]);
+  const movies = useSelector((state)=>(state.movies))
+  const dispatch = useDispatch()
+  // const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(500);
   const [sortBy, setSortBy] = useState('popularity');
+
+  
+  const setMovies = useCallback((movies)=>{
+    dispatch({type: 'movies/set', payload: movies})
+  }, [dispatch])
+
   function fetchMovies(){
     if(query !== '' || query.length>1  ){
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=d65708ab6862fb68c7b1f70252b5d91c&language=ru-RU&sort_by=${sortBy}.desc&page=${currentPage}&include_adult=false&query=${query}`)
         .then(res => res.json())
         .then(
           (result) => {
-            setData(result.results);
+            setMovies(result.results);
             setTotalPage(Math.min(result.total_pages, 500))
           },
         )
@@ -31,7 +40,7 @@ function MoviesComponent(){
       .then(res => res.json())
       .then(
         (result) => {
-          setData(result.results);
+          setMovies(result.results);
           setTotalPage(Math.min(result.total_pages, 500))
         },
       )
@@ -40,6 +49,7 @@ function MoviesComponent(){
   useEffect(() => {
     fetchMovies()
     }, [currentPage , sortBy])
+
   return <div className="App">
           <div className='header'>
               <p className='text' style={{color:'black', margin: '10px 0px'}}>Movies</p>
@@ -67,7 +77,7 @@ function MoviesComponent(){
           </div>
 
           <div className='mainPageMovies'>
-              <Movies data={data}/>
+              <Movies data={movies}/>
           </div>
           <div className='pagination'>
             <Pagination count={totalPage} color="primary"  onChange={(event, value)=> setCurrentPage(value)} showFirstButton showLastButton  />

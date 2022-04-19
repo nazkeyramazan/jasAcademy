@@ -1,26 +1,33 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
+import {useSelector, useDispatch} from 'react-redux';
 
 function RickAndMorty(){
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
+    const rickAndMorty = useSelector((state)=>state.rickAndMorty)
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
-    
+    const dispatch = useDispatch();
+
+    const setRickAndMorty = useCallback((data)=>{
+        dispatch({type: 'rickAndMorty/set', payload:data})
+    }, [dispatch])
+
     useEffect(()=>{
       fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
       .then(res => res.json())
       .then(
         (result) => {
-          setData(result.results);
+            setRickAndMorty(result.results);
         },
       )
     },[currentPage]);
     return <div className="App">
         {
-            data.map((item, index)=>(
+            rickAndMorty.map((item, index)=>(
                 <Box sx={{ flexGrow: 0.5}} onClick={()=>{navigate("/rickAndMorty/"+item.id)}} key={index}>
                     <Grid 
                         container
