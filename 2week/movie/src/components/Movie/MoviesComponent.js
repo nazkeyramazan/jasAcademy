@@ -33,7 +33,7 @@ function MoviesComponent(){
   const setCurrentPage = useCallback((payload)=>{
     dispatch({type:'movies/setCurrentPage', payload})
   }, [dispatch])
-  const searchMovies = useCallback(({currentPage = 1, sortBy = 'popularity'} = {}) => {
+  const searchMovies = useCallback(({ sortBy = 'popularity'} = {}) => {
     dispatch(fetchMovies({ currentPage, sortBy, query }))
 }, [dispatch, query, sortBy])
 

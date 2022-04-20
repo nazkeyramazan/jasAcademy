@@ -13,7 +13,7 @@ import Counter from './components/ClassComponents/Counter';
 import FunctionalCounter from './components/FunctionalComponent/Counter';
 import BinarySearch from './components/binarySearch';
 import ToDo from './components/ToDo/ToDo';
-
+import ShopComponent from './components/ShopComponent/ShopComponent';
 function App() {
 
   const [token, setToken] = useState(localStorage.getItem('idToken'));
@@ -35,6 +35,7 @@ function App() {
           <Route path="/functionalCounter/" element={<FunctionalCounter/>} />
           <Route path="/BinarySearch/" element={<BinarySearch/>} />
           <Route path="/todo/" element={<ToDo/>} />
+          <Route path="/shop/" element={<ShopComponent/>} />
           
           {/* <Route path="*" element={<Navigate to="/movie" replace />} /> */}
         </Routes>

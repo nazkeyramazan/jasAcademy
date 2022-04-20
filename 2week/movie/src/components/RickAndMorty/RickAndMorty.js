@@ -6,22 +6,25 @@ import Pagination from '@mui/material/Pagination';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchRickAndMorty} from '../../app/actions/fetchRickAndMorty'
 function RickAndMorty(){
-    // const [data, setData] = useState([]);
+
     const rickAndMorty = useSelector((state)=>state.rickAndMortyReducer.rickAndMorty)
     const currentPage = useSelector((state)=>state.rickAndMortyReducer.currentPage);
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     
     const setCurrentPage = useCallback((currentPage)=>{
         dispatch({type:'rickAndMorty/setCurrentPage', payload: currentPage})
     }, [dispatch])
+    
     const searchMovies = useCallback((value) => {
         dispatch(fetchRickAndMorty({ currentPage:value }))
     }, [dispatch, currentPage])
+    
     useEffect(() => {
         dispatch(fetchRickAndMorty())
         }, [dispatch])
+    
     return <div className="App">
         {
             rickAndMorty.map((item, index)=>(

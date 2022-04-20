@@ -1,6 +1,6 @@
 
 const inititalState = {
-    todos: JSON.parse(localStorage.getItem('todos')) || [],
+    todos: [],
 }
 export const todosReducer = function (state = inititalState, action) {
     const newState = { ...state }
