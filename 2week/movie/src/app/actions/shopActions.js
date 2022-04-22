@@ -1,5 +1,6 @@
 import axios from 'axios';
 export const SET_PRODUCTS = 'shop/setProducts'
+export const SET_ONE_PRODUCT = 'shop/setOneProduct'
 export const ADD_TO_BASKET = 'shop/addToBasket'
 export const REMOVE_FROM_BASKET = 'shop/removeFromBasket'
 export const CLEAR_BASKET = 'shop/clearBasket'
@@ -8,6 +9,18 @@ export const fetchProducts = ()=> dispatch =>{
     .then(res=>{
         dispatch({
             type: SET_PRODUCTS,
+            payload: res.data
+        })
+    }
+    )
+    
+}
+export const fetchOneProduct = ()=> dispatch =>{
+    axios.get('https://fakestoreapi.com/products/21')
+    .then(res=>res.json())
+    .then(res=>{
+        dispatch({
+            type: SET_ONE_PRODUCT,
             payload: res.data
         })
     }

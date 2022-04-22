@@ -1,7 +1,7 @@
 import { Container, Grid } from "@mui/material";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchProducts} from '../../app/actions/shopActions'
+import { fetchProducts} from '../../app/actions/shopActions'
 import { ProductBlock } from "./ProductBlock";
 import { Basket } from "./Basket";
 import {addToBasket} from '../../app/actions/shopActions'

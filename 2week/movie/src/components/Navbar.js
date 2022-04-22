@@ -7,10 +7,10 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import { Auth } from '../context/Auth';
+import {AddNewProduct} from './ShopComponent/AddNewProduct';
 export const Navbar = () => {
     const navigate = useNavigate()
     const {token, setToken} = useContext(Auth)
-
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
@@ -66,12 +66,17 @@ export const Navbar = () => {
                     </Box>
                     {token?
                     (
-                        <Button 
-                            onClick={() => {setToken(false)}}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            Выйти
-                        </Button>
+                        <div style={{display:'flex', alignItems:'center'}}>
+                            
+                             <AddNewProduct/>  
+
+                            <Button 
+                                onClick={() => {setToken(false)}}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Выйти
+                            </Button>
+                        </div>
                     )
                     :(
                     <>

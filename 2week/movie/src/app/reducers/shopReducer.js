@@ -1,7 +1,8 @@
-import { ADD_TO_BASKET, CLEAR_BASKET, REMOVE_FROM_BASKET, SET_PRODUCTS } from "../actions/shopActions";
+import { ADD_TO_BASKET, CLEAR_BASKET, REMOVE_FROM_BASKET, SET_PRODUCTS, SET_ONE_PRODUCT } from "../actions/shopActions";
 
 const inititalState = {
     products: [],
+    product: {},
     basket: JSON.parse(localStorage.getItem('basket')) || [],
 }
 function containsObject(obj, list) {
@@ -20,11 +21,14 @@ export const shopReducer = function(state=inititalState , action){
         case SET_PRODUCTS:
             newState.products = action.payload
             break;
+        case SET_ONE_PRODUCT:
+            newState.product = action.payload
+            break;    
         case ADD_TO_BASKET:
             let boo = containsObject(action.payload, newState.basket);
             if(boo){
                 newState.basket.map(item=>{
-                    if(item.id==action.payload.id)
+                    if(item.id===action.payload.id)
                         item.cnt = item.cnt+1;
                 });
                 newState.basket = [...newState.basket]
@@ -32,7 +36,7 @@ export const shopReducer = function(state=inititalState , action){
             } else{
                 newState.basket = [...newState.basket, action.payload]
                 newState.basket.map(item=>{
-                    if(item.id==action.payload.id)
+                    if(item.id===action.payload.id)
                         item.cnt = 1;
                 });
                 newState.basket = [...newState.basket]
@@ -41,7 +45,7 @@ export const shopReducer = function(state=inititalState , action){
             break;
         case REMOVE_FROM_BASKET:
             newState.basket.map(item=>{
-                if(item.id == action.payload){
+                if(item.id === action.payload){
                     if(item.cnt>=2)
                         item.cnt = item.cnt-1;
                     else    
