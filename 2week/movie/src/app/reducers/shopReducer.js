@@ -38,7 +38,6 @@ export const shopReducer = function(state=inititalState , action){
                 newState.basket = [...newState.basket]
 
             }
-                console.log(newState.basket)
             break;
         case REMOVE_FROM_BASKET:
             newState.basket.map(item=>{

@@ -1,5 +1,5 @@
 import {styled} from "@mui/material";
-import {useState, useCallback} from "react";
+import {useState, useCallback, useMemo} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -74,19 +74,27 @@ export function Basket() {
     const handleClearBasket = useCallback(() => {
         dispatch(clearBasket())
     }, [dispatch])
-    const sum = 0;
+    const sum = useMemo(()=>{
+        const a = basket !=[] ? basket.map((item)=>{
+            return Math.round(item.price*100)/100 * Math.round(item.cnt*100)/100
+        }).reduce((acc, item)=> acc + item ,0
+        ) : 0;
+        return a;  
+    }, [basket]);
+
     return (
         <Wrapper onClick={() => setExpanded(!expanded)} expanded={expanded}>
             {!expanded ? <BasketIcon><ShoppingCartIcon/></BasketIcon>
-             :<>
+             :
+             <>
             {basket.map((product, index) => (
                 <BasketItem product={product} key={index}  handleRemoveItem={handleRemoveItem}/>
                 
             ))}
             
             <div className="clearIcon"> 
-                <h4>Total: {sum} $</h4>
-                <ClearAllIcon  onClick={(e)=>{
+                <h4 title="Total cost">Total: {sum} $</h4>
+                <ClearAllIcon onClick={(e)=>{
                     e.stopPropagation()
                     handleClearBasket()
                     }}/>
