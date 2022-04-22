@@ -1,7 +1,8 @@
-import { ADD_TO_BASKET, ADD_PRODUCT_TO_REDUX_STORE, CLEAR_BASKET, REMOVE_FROM_BASKET, SET_PRODUCTS, SET_ONE_PRODUCT } from "../actions/shopActions";
+import { ADD_TO_BASKET, ADD_PRODUCT_TO_REDUX_STORE, CLEAR_BASKET, REMOVE_FROM_BASKET, SET_PRODUCTS, SET_ONE_PRODUCT, SET_LOADING } from "../actions/shopActions";
 
 const inititalState = {
     products: [],
+    loading: true,
     product: {},
     basket: JSON.parse(localStorage.getItem('basket')) || [],
 }
@@ -18,6 +19,9 @@ function containsObject(obj, list) {
 export const shopReducer = function(state=inititalState , action){
     const newState = {...state};
     switch (action.type) {
+        case SET_LOADING:
+            newState.loading = action.payload
+            break; 
         case SET_PRODUCTS:
             newState.products = action.payload
             break;

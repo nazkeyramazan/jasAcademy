@@ -11,7 +11,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProductToReduxStore } from '../../app/actions/shopActions';
 
 export function AddNewProduct( ){
@@ -25,23 +25,20 @@ export function AddNewProduct( ){
         category: ''
     })
     const dispatch = useDispatch();
+    const lastID = useSelector((state)=>state.shopReducer.products[state.shopReducer.products.length-1]?.id)
     const handleClickOpen = () =>{
         setOpenModal(true)
     }
     const handleClose = () =>{
         setOpenModal(false)
     }
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
-      }
+
     const handleAdd = () =>{
         const data = product;
         if(data.image === ''){
             data.image = 'https://tl.rulate.ru/i/book/19/10/18925.jpg'
         }
-        data.id = getRandomInt(21, 10000);
+        data.id = lastID+1;
         data.rating = {rate:4.5, count: 5};
         dispatch(addProductToReduxStore(data))
         setProduct({

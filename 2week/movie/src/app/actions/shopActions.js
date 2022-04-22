@@ -5,12 +5,19 @@ export const ADD_TO_BASKET = 'shop/addToBasket'
 export const REMOVE_FROM_BASKET = 'shop/removeFromBasket'
 export const CLEAR_BASKET = 'shop/clearBasket'
 export const ADD_PRODUCT_TO_REDUX_STORE = 'shop/createNewProuduct'
+
+export const SET_LOADING = 'shop/setLoading'
+
 export const fetchProducts = ()=> dispatch =>{
     axios.get('https://fakestoreapi.com/products?limit=20')
     .then(res=>{
         dispatch({
             type: SET_PRODUCTS,
             payload: res.data
+        })
+        dispatch({
+            type: SET_LOADING,
+            payload: false
         })
     }
     )
