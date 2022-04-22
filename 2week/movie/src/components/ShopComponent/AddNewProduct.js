@@ -12,7 +12,7 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch } from 'react-redux';
-import { fetchOneProduct } from '../../app/actions/shopActions';
+import { addProductToReduxStore } from '../../app/actions/shopActions';
 
 export function AddNewProduct( ){
 
@@ -21,7 +21,7 @@ export function AddNewProduct( ){
         title:'',
         price: 0,
         decription: '',
-        image: 'https://tl.rulate.ru/i/book/19/10/18925.jpg',
+        image: '',
         category: ''
     })
     const dispatch = useDispatch();
@@ -31,16 +31,33 @@ export function AddNewProduct( ){
     const handleClose = () =>{
         setOpenModal(false)
     }
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+      }
     const handleAdd = () =>{
+        const data = product;
+        if(data.image === ''){
+            data.image = 'https://tl.rulate.ru/i/book/19/10/18925.jpg'
+        }
+        data.id = getRandomInt(21, 10000);
+        data.rating = {rate:4.5, count: 5};
+        dispatch(addProductToReduxStore(data))
+        setProduct({
+            title:'',
+            price: 0,
+            decription: '',
+            image: '',
+            category: ''
+        })
         fetch('https://fakestoreapi.com/products',{
             method:"POST",
             body:JSON.stringify(product)
         })
             .then(res=>res.json())
             .then(res=>console.log(res))
-            .then(
-                dispatch(fetchOneProduct())
-            )
+        setOpenModal(false)
 
     }
     const handleInputChange = (e) =>{

@@ -1,4 +1,4 @@
-import { ADD_TO_BASKET, CLEAR_BASKET, REMOVE_FROM_BASKET, SET_PRODUCTS, SET_ONE_PRODUCT } from "../actions/shopActions";
+import { ADD_TO_BASKET, ADD_PRODUCT_TO_REDUX_STORE, CLEAR_BASKET, REMOVE_FROM_BASKET, SET_PRODUCTS, SET_ONE_PRODUCT } from "../actions/shopActions";
 
 const inititalState = {
     products: [],
@@ -23,7 +23,10 @@ export const shopReducer = function(state=inititalState , action){
             break;
         case SET_ONE_PRODUCT:
             newState.product = action.payload
-            break;    
+            break;
+        case ADD_PRODUCT_TO_REDUX_STORE:
+            newState.products = [...newState.products, action.payload]
+            break;
         case ADD_TO_BASKET:
             let boo = containsObject(action.payload, newState.basket);
             if(boo){
