@@ -29,7 +29,7 @@ function Movies({data}){
                         alignItems="center" 
                         spacing={1} 
                         >
-                        <Grid item xs={0} style={{marginBottom: '18px'}} >
+                        <Grid item xs={2} md={6} style={{marginBottom: '18px'}} >
                             <div className='image' style={{backgroundImage: `url(${URL}${item.poster_path})`}} >
                                 <div className='poster' >
                                         <div className='rate'>

@@ -5,6 +5,7 @@ import { fetchProducts} from '../../app/actions/shopActions'
 import { ProductBlock } from "./ProductBlock";
 import { Basket } from "./Basket";
 import {addToBasket} from '../../app/actions/shopActions'
+import { NewBasket } from "./newBasket";
 
 function ShopComponent(){
 
@@ -43,12 +44,13 @@ function ShopComponent(){
             <>
             <Grid container spacing={2}>
                 {products.map((product) => (
-                    <Grid item xs={3} key={product.id}>
+                    <Grid item xs={12} md={6} lg={3} key={product.id}>
                         <ProductBlock product={product} onAddToBasket={() => handleAddToBasket(product)} />
                     </Grid>
                 ))}
             </Grid>
-            <Basket/>
+            {/* <Basket/> */}
+            <NewBasket/>
             </>
             }
             

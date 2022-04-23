@@ -35,16 +35,20 @@ export const shopReducer = function(state=inititalState , action){
             let boo = containsObject(action.payload, newState.basket);
             if(boo){
                 newState.basket.map(item=>{
-                    if(item.id===action.payload.id)
+                    if(item.id===action.payload.id){
                         item.cnt = item.cnt+1;
+                        item.totalPrice = item.cnt * item.price;
+                    }
                 });
                 newState.basket = [...newState.basket]
 
             } else{
                 newState.basket = [...newState.basket, action.payload]
                 newState.basket.map(item=>{
-                    if(item.id===action.payload.id)
+                    if(item.id===action.payload.id){
                         item.cnt = 1;
+                        item.totalPrice = action.payload.price
+                    }
                 });
                 newState.basket = [...newState.basket]
 
@@ -53,11 +57,14 @@ export const shopReducer = function(state=inititalState , action){
         case REMOVE_FROM_BASKET:
             newState.basket.map(item=>{
                 if(item.id === action.payload){
-                    if(item.cnt>=2)
+                    if(item.cnt>=2){
                         item.cnt = item.cnt-1;
+                        item.totalPrice = item.cnt * item.price;
+                    }
                     else    
                     if(item.cnt===1){
                         newState.basket = state.basket.filter(product => product.id !== action.payload)
+                        item.totalPrice = 0 * item.price;
                     }    
                 }
             });
