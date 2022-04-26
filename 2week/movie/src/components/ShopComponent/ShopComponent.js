@@ -3,9 +3,9 @@ import { useEffect, useCallback} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts} from '../../app/actions/shopActions'
 import { ProductBlock } from "./ProductBlock";
-import { Basket } from "./Basket";
 import {addToBasket} from '../../app/actions/shopActions'
 import { NewBasket } from "./newBasket";
+import {OrderForm} from "./OrderForm";
 
 function ShopComponent(){
 
@@ -25,18 +25,18 @@ function ShopComponent(){
             {loading ? 
             <div className="loading">
                 <div className="lds-spinner">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+
                 </div>
             </div>
              
@@ -50,7 +50,10 @@ function ShopComponent(){
                 ))}
             </Grid>
             {/* <Basket/> */}
-            <NewBasket/>
+
+                <NewBasket/>
+                <OrderForm/>
+
             </>
             }
             

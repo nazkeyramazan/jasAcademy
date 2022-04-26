@@ -4,7 +4,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector, useDispatch } from 'react-redux';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { addToBasket, clearBasket, removeFromBasket } from "../../app/actions/shopActions";
+import {addToBasket, clearBasket, OPEN_MODAL, removeFromBasket} from "../../app/actions/shopActions";
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import AddIcon from '@mui/icons-material/Add';
 const Wrapper = styled('div')`
@@ -100,6 +100,9 @@ export function NewBasket(){
     }
     const dispatch = useDispatch();
     const basket = useSelector((state) => state.shopReducer.basket)
+    const openModal = useCallback(()=>{
+        dispatch({type: OPEN_MODAL})
+    }, [dispatch])
     const handleRemoveItem = useCallback((id) => {
         dispatch(removeFromBasket(id))
     }, [dispatch])
@@ -149,7 +152,7 @@ export function NewBasket(){
                 ))}
 
                     <div className="clearIcon"> 
-                        <Button variant="outlined">Buy</Button>
+                        <Button variant="outlined" onClick={()=>openModal()}>Order</Button>
                         <button title="clear basket">
                             <ClearAllIcon style={{cursor:'pointer'}} onClick={(e)=>{
                                 e.stopPropagation()

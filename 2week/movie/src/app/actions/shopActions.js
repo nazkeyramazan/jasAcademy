@@ -7,6 +7,9 @@ export const CLEAR_BASKET = 'shop/clearBasket'
 export const ADD_PRODUCT_TO_REDUX_STORE = 'shop/createNewProuduct'
 
 export const SET_LOADING = 'shop/setLoading'
+export const OPEN_MODAL = 'shop/openOrderModal'
+export const CLOSE_MODAL = 'shop/closeOrderModal'
+
 
 export const fetchProducts = ()=> dispatch =>{
     axios.get('https://fakestoreapi.com/products?limit=20')
