@@ -23,7 +23,7 @@ export type FetchUserAction = {
 }
 export type FetchUserSuccessAction = {
     type: UserActionType.FETCH_USERS_SUCCESS,
-    payload: User
+    payload: User[]
 }
 export type FetchUserRejectAction = {
     type: UserActionType.FETCH_USERS_REJECT,

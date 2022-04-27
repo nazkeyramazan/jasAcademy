@@ -1,17 +1,15 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { useTypedSelector } from '../hooks/useTypedSelector'
-import { fetchUsers } from '../store/actions/fetchUsers'
-import { User } from '../types/userTypes'
+import { useUserActions } from '../hooks/useUserActions'
 import { UserItem } from './UserItem'
 
 export function UserList() {
     const { users, error, loading } = useTypedSelector((state) => state.user)
-    const dispatch = useDispatch()
+    const { fetchUsers } = useUserActions()
 
     useEffect(() => {
-        dispatch(fetchUsers() as any)
-    }, [dispatch])
+        fetchUsers()
+    }, [fetchUsers])
 
     if (loading) {
         return (
@@ -26,7 +24,7 @@ export function UserList() {
 
     return (
         <div>
-            {(users as User[]).map((user) => <UserItem user={user} />)}
+            {users.map((user) => <UserItem key={user.id} user={user} />)}
         </div>
     )
 }

@@ -1,10 +1,11 @@
+import { Reducer } from 'redux'
 import { UserAction, UserActionType, UserState } from '../../types/userTypes'
 
 const initState = {
     users: [],
     loading: false,
 }
-export const userReducer = (state: UserState = initState, action: UserAction) => {
+export const userReducer: Reducer<UserState, UserAction> = (state = initState, action) => {
     switch (action.type) {
         case UserActionType.FETCH_USERS:
             return { ...state, loading: true, error: undefined }
