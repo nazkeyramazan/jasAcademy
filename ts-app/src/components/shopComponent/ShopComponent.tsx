@@ -5,6 +5,7 @@ import {ProductBlock} from "./ProductBlock";
 import {Basket} from "./Basket";
 import { Grid } from "@mui/material";
 import {Product} from "../../types/productTypes";
+import {OrderForm} from "./OrderForm";
 
 export function ShopComponent(){
     const { product, error, loading } = useTypedSelector((state) => state.product)
@@ -41,8 +42,7 @@ export function ShopComponent(){
                 ))}
             </Grid>
             <Basket/>
-            {/*<NewBasket/>*/}
-            {/*<OrderForm/>*/}
+            <OrderForm/>
         </>
 
     )

@@ -4,10 +4,11 @@ import {Product, ProductAction, ProductActionTypes, reducerInitState} from "../.
 const initState = {
     product: [],
     loading: false,
-    basket: JSON.parse(localStorage.getItem('basket') || '[]')
+    basket: JSON.parse(localStorage.getItem('basket') || '[]'),
+    orderModalState: false
 }
 function containsObject(obj: object, list:any) {
-    var i;
+    let i;
     for (i = 0; i < list.length; i++) {
         if (list[i] === obj) {
             return true;
@@ -70,6 +71,12 @@ export const productReducer: Reducer<reducerInitState, ProductAction> = (state =
             break
         case ProductActionTypes.CLEAR_BASKET:
             newState.basket = [];
+            break
+        case ProductActionTypes.OPEN_MODAL:
+            newState.orderModalState = true
+            break
+        case ProductActionTypes.CLOSE_MODAL:
+            newState.orderModalState = false
             break
         default:
             return state

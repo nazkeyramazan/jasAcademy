@@ -31,3 +31,14 @@ export const clearBasket = ()  => (dispatch:Dispatch<ProductAction>) =>{
         type: ProductActionTypes.CLEAR_BASKET,
     })
 }
+
+export const openOrderModal = () => (dispatch:Dispatch<ProductAction>)=>{
+    dispatch({
+        type: ProductActionTypes.OPEN_MODAL
+    })
+}
+export const closeOrderModal = () => (dispatch:Dispatch<ProductAction>)=>{
+    dispatch({
+        type: ProductActionTypes.CLOSE_MODAL
+    })
+}

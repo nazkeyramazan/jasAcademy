@@ -7,11 +7,6 @@ export enum ProductActionTypes {
     REMOVE_FROM_BASKET = 'shop/removeFromBasket',
     CLEAR_BASKET = 'shop/clearBasket',
 
-
-    SET_PRODUCTS = 'shop/setProducts',
-    SET_ONE_PRODUCT = 'shop/setOneProduct',
-    ADD_PRODUCT_TO_REDUX_STORE = 'shop/createNewProuduct',
-
     OPEN_MODAL = 'shop/openOrderModal',
     CLOSE_MODAL = 'shop/closeOrderModal',
 }
@@ -31,6 +26,7 @@ export type reducerInitState = {
     loading: boolean
     error?: string
     basket: any
+    orderModalState: boolean
 }
 
 export type ProductActionFetch = {
@@ -52,10 +48,16 @@ export type ProductRemoveFromBasket = {
     type: ProductActionTypes.REMOVE_FROM_BASKET,
     payload: number
 }
-
 export type ProductClearBasket = {
     type: ProductActionTypes.CLEAR_BASKET
 }
+export type ProductOpenOrderModal = {
+    type: ProductActionTypes.OPEN_MODAL
+}
+export type ProductCloseOrderModal = {
+    type: ProductActionTypes.CLOSE_MODAL
+}
 export type ProductAction = ProductActionFetch | ProductActionFetchSuccess |
                             ProductActionFetchError | ProductAddToBasket |
-                            ProductRemoveFromBasket | ProductClearBasket
+                            ProductRemoveFromBasket | ProductClearBasket |
+    ProductOpenOrderModal | ProductCloseOrderModal

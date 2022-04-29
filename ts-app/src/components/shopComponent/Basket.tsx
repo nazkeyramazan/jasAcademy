@@ -141,6 +141,11 @@ export function Basket(){
         ) : 0;
         return a;
     }, [basket]);
+
+    const {openOrderModal} = useProductActions()
+    const handleClickOpen = useCallback(()=>{
+        openOrderModal()
+    }, [openOrderModal])
     return(
         <Wrapper>
             <Button onClick={openBasket}>
@@ -163,7 +168,7 @@ export function Basket(){
 
                             ))}
                             <BasketBottomBlock>
-                                <Button variant="outlined" >Order</Button>
+                                <Button variant="outlined" onClick={handleClickOpen}>Order</Button>
                                 <button title="clear basket">
                                     <ClearAllIcon style={{cursor:'pointer'}} onClick={(e)=>{
                                         e.stopPropagation()
