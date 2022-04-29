@@ -1,5 +1,6 @@
 import {Reducer} from 'redux'
-import {ProductAction, ProductActionTypes, reducerInitState} from "../../types/productTypes";
+import {Product, ProductAction, ProductActionTypes, reducerInitState} from "../../types/productTypes";
+
 const initState = {
     product: [],
     loading: false,
@@ -50,6 +51,22 @@ export const productReducer: Reducer<reducerInitState, ProductAction> = (state =
                 newState.basket = [...newState.basket]
 
             }
+            break
+        case ProductActionTypes.REMOVE_FROM_BASKET:
+            newState.basket.map((item:any)=>{
+                if(item.id === action.payload){
+                    if(item.cnt>=2){
+                        item.cnt = item.cnt-1;
+                        item.totalPrice = item.cnt * item.price;
+                    }
+                    else
+                    if(item.cnt===1){
+                        newState.basket = state.basket.filter((product:Product) => product.id !== action.payload)
+                        item.totalPrice = 0 * item.price;
+                    }
+                }
+            });
+            newState.basket = [...newState.basket]
             break
         default:
             return state

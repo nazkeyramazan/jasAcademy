@@ -1,7 +1,6 @@
 import axios from 'axios'
-import { Dispatch } from 'redux'
+import {Dispatch} from 'redux'
 import {Product, ProductAction, ProductActionTypes} from '../../types/productTypes'
-
 
 
 export const fetchProducts = () => (dispatch: Dispatch<ProductAction>) => {
@@ -19,14 +18,14 @@ export const addToBasket = (product:Product) => (dispatch:Dispatch<ProductAction
         payload: product,
     })
 }
-//
-// export const removeFromBasket = (product:Product)  => dispatch =>{
-//     dispatch({
-//         type: REMOVE_FROM_BASKET,
-//         payload: product
-//     })
-// }
-//
+
+export const removeFromBasket = (id:number)  => (dispatch:Dispatch<ProductAction>) =>{
+    dispatch({
+        type: ProductActionTypes.REMOVE_FROM_BASKET,
+        payload: id
+    })
+}
+
 // export const clearBasket = ()  => dispatch =>{
 //     dispatch({
 //         type: CLEAR_BASKET,

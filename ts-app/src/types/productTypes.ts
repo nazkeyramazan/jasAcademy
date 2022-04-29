@@ -48,5 +48,10 @@ export type ProductAddToBasket = {
     type: ProductActionTypes.ADD_TO_BASKET,
     payload: Product
 }
-
-export type ProductAction = ProductActionFetch | ProductActionFetchSuccess | ProductActionFetchError | ProductAddToBasket
+export type ProductRemoveFromBasket = {
+    type: ProductActionTypes.REMOVE_FROM_BASKET,
+    payload: number
+}
+export type ProductAction = ProductActionFetch | ProductActionFetchSuccess |
+                            ProductActionFetchError | ProductAddToBasket |
+                            ProductRemoveFromBasket

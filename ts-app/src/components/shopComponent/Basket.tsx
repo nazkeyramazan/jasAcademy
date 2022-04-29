@@ -9,6 +9,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import AddIcon from '@mui/icons-material/Add';
 import {Product} from "../../types/productTypes";
+import {useProductActions} from "../../hooks/useProductActions";
 
 const Wrapper = styled('div')`
   position: absolute;
@@ -98,6 +99,7 @@ export function Basket(){
     const [open, setOpen] = useState<boolean>(false)
     const [openModal, setOpenModal] = useState<boolean>(false)
     const { basket } = useTypedSelector((state) => state.product)
+    const { removeFromBasket, addToBasket } = useProductActions()
 
     const openBasket = () => {
         setOpen(true)
@@ -105,13 +107,13 @@ export function Basket(){
     const closeBasket = () => {
         setOpen(false)
     }
-    const  handleRemoveItem = () =>{
+    const  handleRemoveItem = useCallback((id:number) =>{
+        removeFromBasket(id)
+    }, [removeFromBasket])
 
-    }
-
-    const handleAddItem = () => {
-
-    }
+    const handleAddItem = useCallback((product:Product) => {
+        addToBasket(product)
+    }, [addToBasket])
     // const productCount = useMemo(()=>{
     //     const a = basket !==[] ? basket.map((item)=>{
     //         return item.cnt
