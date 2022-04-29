@@ -52,6 +52,10 @@ export type ProductRemoveFromBasket = {
     type: ProductActionTypes.REMOVE_FROM_BASKET,
     payload: number
 }
+
+export type ProductClearBasket = {
+    type: ProductActionTypes.CLEAR_BASKET
+}
 export type ProductAction = ProductActionFetch | ProductActionFetchSuccess |
                             ProductActionFetchError | ProductAddToBasket |
-                            ProductRemoveFromBasket
+                            ProductRemoveFromBasket | ProductClearBasket

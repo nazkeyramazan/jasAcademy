@@ -68,6 +68,9 @@ export const productReducer: Reducer<reducerInitState, ProductAction> = (state =
             });
             newState.basket = [...newState.basket]
             break
+        case ProductActionTypes.CLEAR_BASKET:
+            newState.basket = [];
+            break
         default:
             return state
     }

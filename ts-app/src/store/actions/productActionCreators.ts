@@ -26,8 +26,8 @@ export const removeFromBasket = (id:number)  => (dispatch:Dispatch<ProductAction
     })
 }
 
-// export const clearBasket = ()  => dispatch =>{
-//     dispatch({
-//         type: CLEAR_BASKET,
-//     })
-// }
+export const clearBasket = ()  => (dispatch:Dispatch<ProductAction>) =>{
+    dispatch({
+        type: ProductActionTypes.CLEAR_BASKET,
+    })
+}

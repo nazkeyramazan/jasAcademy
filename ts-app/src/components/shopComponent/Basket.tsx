@@ -99,7 +99,7 @@ export function Basket(){
     const [open, setOpen] = useState<boolean>(false)
     const [openModal, setOpenModal] = useState<boolean>(false)
     const { basket } = useTypedSelector((state) => state.product)
-    const { removeFromBasket, addToBasket } = useProductActions()
+    const { removeFromBasket, addToBasket, clearBasket } = useProductActions()
 
     const openBasket = () => {
         setOpen(true)
@@ -114,22 +114,26 @@ export function Basket(){
     const handleAddItem = useCallback((product:Product) => {
         addToBasket(product)
     }, [addToBasket])
-    // const productCount = useMemo(()=>{
-    //     const a = basket !==[] ? basket.map((item)=>{
-    //         return item.cnt
-    //     }).reduce((acc:number | undefined, item:number| undefined)=> acc + item ,0
-    //     ) : 0;
-    //     return a;
-    // }, [basket])
-    // const sum = useMemo(()=>{
-    //     const a = basket !==[] ? basket.map((item)=>{
-    //         if(item.cnt != undefined) {
-    //             return Math.round(parseInt(item.price)*100)/100 * Math.round(item.cnt*100)/100
-    //         }return 1
-    //     }).reduce((acc, item)=> acc + item ,0
-    //     ) : 0;
-    //     return a;
-    // }, [basket]);
+
+    const handleClearBasket = useCallback(()=>{
+        clearBasket()
+    }, [clearBasket])
+    const productCount = useMemo(()=>{
+        const a = basket !==[] ? basket.map((item:any)=>{
+            return item.cnt
+        }).reduce((acc:number , item:number)=> acc + item ,0
+        ) : 0;
+        return a;
+    }, [basket])
+    const sum = useMemo(()=>{
+        const a = basket !==[] ? basket.map((item:any)=>{
+            if(item.cnt != undefined) {
+                return Math.round(parseInt(item.price)*100)/100 * Math.round(item.cnt*100)/100
+            }return 1
+        }).reduce((acc:number, item:number)=> acc + item ,0
+        ) : 0;
+        return a;
+    }, [basket]);
     return(
         <Wrapper>
             <Button onClick={openBasket}>
@@ -146,8 +150,7 @@ export function Basket(){
                         <img src={emptyCart} alt=""/>
                         :
                         <BasketContainer>
-                            {/*<h4 title="Total cost">  Products for {Math.round(sum*1000)/1000}$</h4>*/}
-                            <h4 title="Total cost">  Products for $</h4>
+                            <h4 title="Total cost">  Products for {sum}$</h4>
                             {basket.map((product:Product, index:number) => (
                                 <BasketItem product={product} key={index} handleRemoveItem={handleRemoveItem}  handleAddItem={handleAddItem}/>
 
@@ -157,7 +160,7 @@ export function Basket(){
                                 <button title="clear basket">
                                     <ClearAllIcon style={{cursor:'pointer'}} onClick={(e)=>{
                                         e.stopPropagation()
-                                        // handleClearBasket()
+                                        handleClearBasket()
                                     }}/>
                                 </button>
 
