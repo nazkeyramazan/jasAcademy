@@ -58,7 +58,14 @@ const ImageInBasket = styled('img')`
   object-fit: contain;
   border-radius: 15%;
 `
-
+const BasketBottomBlock = styled('div')`
+    width: -webkit-fill-available;
+    padding: 15px;
+    display: flex;
+    margin-top: auto;
+    justify-content: space-between;
+    align-items: center;
+`
 type Props = {
     product: Product,
     handleRemoveItem: any,
@@ -150,12 +157,12 @@ export function Basket(){
                         <img src={emptyCart} alt=""/>
                         :
                         <BasketContainer>
-                            <h4 title="Total cost">  Products for {sum}$</h4>
+                            <h4 title="Total cost"> {productCount} Products for {sum}$</h4>
                             {basket.map((product:Product, index:number) => (
                                 <BasketItem product={product} key={index} handleRemoveItem={handleRemoveItem}  handleAddItem={handleAddItem}/>
 
                             ))}
-                            <div className="clearIcon">
+                            <BasketBottomBlock>
                                 <Button variant="outlined" >Order</Button>
                                 <button title="clear basket">
                                     <ClearAllIcon style={{cursor:'pointer'}} onClick={(e)=>{
@@ -164,7 +171,7 @@ export function Basket(){
                                     }}/>
                                 </button>
 
-                            </div>
+                            </BasketBottomBlock>
                         </BasketContainer>
                     }
                 </>
