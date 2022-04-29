@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
-import { UserActionType } from '../../types/userTypes'
+import {User, UserAction, UserActionType} from '../../types/userTypes'
 
-export const fetchUsers = () => (dispatch: Dispatch) => {
+export const fetchUsers = () => (dispatch: Dispatch<UserAction>) => {
     dispatch({ type: UserActionType.FETCH_USERS })
-    axios.get('https://jsonplaceholder.typicode.com/users').then((res) => {
+    axios.get<User[]>('https://jsonplaceholder.typicode.com/users').then((res) => {
         setTimeout(() => {
             dispatch({ type: UserActionType.FETCH_USERS_SUCCESS, payload: res.data })
         },1000)
