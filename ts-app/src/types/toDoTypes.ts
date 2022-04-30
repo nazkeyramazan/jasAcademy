@@ -15,7 +15,7 @@ export type ToDoTypes = {
     clientId?: string
     clientName?: string
     createTimestamp?: string
-    plannedEndTime: string
+    plannedEndTime: Date | string
     plannedStartTime: string
     taskId: string
     taskTypeId: string

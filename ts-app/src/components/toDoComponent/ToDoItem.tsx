@@ -1,11 +1,12 @@
 import {styled} from "@mui/material";
+import {ToDoTypes} from "../../types/toDoTypes";
 
 const MainBlock = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 12px 16px;
-  width: 228px;
+  width: 220px;
   height: 64px;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
@@ -14,7 +15,7 @@ const MainBlock = styled('div')`
   order: 0;
   align-self: stretch;
   flex-grow: 0;
-  margin: 16px 0px;
+  margin: 16px 3px;
 `
 const StyledImg = styled('img')`
   width: 24px;
@@ -56,10 +57,37 @@ const BottomBlock = styled('div')`
   flex-grow: 0;
   margin: 8px 0px;
 `
+const TaskType = styled('div')`
+`
+const GreenType = styled('div')`
+  background: #27AE60;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.004em;
+  color: #FFFFFF;
+`
+const BlueType = styled('div')`
+  background: #1369BF;
+  border-radius: 4px;
+  padding: 0 6px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.004em;
+  color: #FFFFFF;
+`
+
 type Props = {
-    toDo: any
+    toDo: ToDoTypes
 }
-function formattedTime(date:Date){
+function formattedTime(date:Date|string){
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
@@ -87,12 +115,19 @@ function formattedName(name: string | undefined){
 
     return res
 }
+
 export function ToDoItem({toDo}:Props){
 
     let time = formattedTime(toDo.plannedStartTime);
     let name = formattedName(toDo.clientName);
     return(
         <MainBlock>
+            <TaskType>
+                {toDo.taskTypeName === 'Встреча'?
+                <GreenType>{toDo.taskTypeName}</GreenType>:
+                    <BlueType>{toDo.taskTypeName}</BlueType>
+                }
+            </TaskType>
             <TopBlock>
                 <Time>
                     {time}
