@@ -6,7 +6,9 @@ import ToDoComponent from './components/toDoComponent/toDoComponent';
 function App() {
     return (
         // <ShopComponent/>
-        <ToDoComponent/>
+        <div style={{margin:'auto'}}>
+            <ToDoComponent />
+        </div>
     )
 }
 
