@@ -1,6 +1,7 @@
-import {ToDoFetched, ToDoTypes} from "../../types/toDoTypes";
+import {DragItem, ToDoFetched, ToDoTypes} from "../../types/toDoTypes";
 import {ToDoItem} from "./ToDoItem";
 import {styled} from "@mui/material";
+import {useDrop} from "react-dnd";
 const TopBlock = styled('div')`
   display: flex;
   text-align: center;
@@ -54,12 +55,24 @@ const List = styled('div')`
   width: 100%;
 `
 type Props = {
-    toDos: ToDoFetched[]
+    toDos?: ToDoFetched[],
+    onDrop: (dragItem:DragItem) => void
 }
-export function ToDoList ({toDos}:Props) {
+export function ToDoList ({toDos, onDrop}:Props) {
+    const [{canDrop, isOver }, drop ] = useDrop(()=>({
+        accept: 'item',
+        drop: (dragItem:DragItem)=>{
+            onDrop(dragItem)
+        },
+        collect: (monitor) => ({
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop()
+        })
+    }))
     return(
-        <div style={{display: "flex"}}>
-            {toDos.map((item:any, index: number)=>{
+        <div ref={drop}
+             style={{display: "flex" }}>
+            {toDos?.map((item:any, index: number)=>{
                 return(
                     <List key={index}>
                         <>
@@ -75,7 +88,7 @@ export function ToDoList ({toDos}:Props) {
                         </>
                         {item.items.map((todo:ToDoTypes)=>{
                         return(
-                            <ToDoItem toDo={todo} key={item.taskId}/>
+                            <ToDoItem toDo={todo} key={item.taskId} item={item}/>
                             )
                         })}
                     </List>

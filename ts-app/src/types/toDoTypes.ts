@@ -4,7 +4,8 @@ export enum ToDoActionTypes {
     TODO_FETCH_ERROR = 'TODO_FETCH_ERROR',
     TODO_OVERDUE_LIST = 'TODO_OVERDUE_LIST',
     TODO_TODAY_LIST = 'TODO_TODAY_LIST',
-    TODO_TOMORROW_LIST = 'TODO_TOMORROW_LIST'
+    TODO_TOMORROW_LIST = 'TODO_TOMORROW_LIST',
+    TODO_DRAG_AND_DROP = 'TODO_DRAG_AND_DROP'
 }
 export type ToDoFetched = {
     items: ToDoTypes[]
@@ -49,4 +50,13 @@ type ToDoToday = {
 type ToDoTomorrow = {
     type: ToDoActionTypes.TODO_TOMORROW_LIST,
 }
-export type ToDoActions = ToDoFetch | ToDoFetchSuccess | ToDoFetchError | ToDoOverdue | ToDoToday | ToDoTomorrow
+export type DragItem =  {
+    toDo: ToDoTypes
+    currentStage: string
+    newStage: string
+}
+type ToDoDragAndDrop ={
+    type: ToDoActionTypes.TODO_DRAG_AND_DROP,
+    payload: DragItem
+}
+export type ToDoActions = ToDoFetch | ToDoFetchSuccess | ToDoFetchError | ToDoOverdue | ToDoToday | ToDoTomorrow |ToDoDragAndDrop

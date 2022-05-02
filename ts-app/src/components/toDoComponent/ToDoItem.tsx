@@ -1,5 +1,6 @@
 import {styled} from "@mui/material";
-import {ToDoTypes} from "../../types/toDoTypes";
+import {ToDoFetch, ToDoTypes} from "../../types/toDoTypes";
+import {useDrag} from "react-dnd";
 
 const MainBlock = styled('div')`
   display: flex;
@@ -85,7 +86,8 @@ const BlueType = styled('div')`
 `
 
 type Props = {
-    toDo: ToDoTypes
+    toDo: ToDoTypes,
+    item: any
 }
 function formattedTime(date:Date|string){
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -116,12 +118,18 @@ function formattedName(name: string | undefined){
     return res
 }
 
-export function ToDoItem({toDo}:Props){
-
+export function ToDoItem({toDo, item}:Props){
+    const [{isDragging}, drag, dragPreview] = useDrag(()=>({
+        type: 'item',
+        item: {toDo:toDo, currentStage: item.stage, newStage:'OVERDUE'},
+        collect:(monitor) => ({
+            isDragging: monitor.isDragging()
+        })
+    }))
     let time = formattedTime(toDo.plannedStartTime);
     let name = formattedName(toDo.clientName);
     return(
-        <MainBlock>
+        <MainBlock ref={drag} role="Handle" style={{ opacity: isDragging ? 0.5 : 1}}>
             <TaskType>
                 {toDo.taskTypeName === 'Встреча'?
                 <GreenType>{toDo.taskTypeName}</GreenType>:

@@ -1,8 +1,9 @@
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {UseToDoActions} from "../../hooks/useToDoActions";
 import {ToDoList} from "./ToDoList";
 import {styled} from "@mui/material";
+import {DragItem, ToDoFetched, ToDoTypes} from "../../types/toDoTypes";
 
 const ToDoListBlock = styled('div')`
   display: flex;
@@ -13,11 +14,13 @@ const ToDoListBlock = styled('div')`
 
 function ToDoComponent(){
     const {toDos, loading, error, overdue, today, tomorrow} = useTypedSelector((state)=>state.toDo)
-    const {fetchToDoList} = UseToDoActions()
+    const {fetchToDoList, onDragAndDrop} = UseToDoActions()
     useEffect(()=>{
         fetchToDoList()
     }, [fetchToDoList])
-
+    const handleDrop = useCallback((dragItem:DragItem)=>{
+        onDragAndDrop(dragItem)
+    }, [onDragAndDrop])
     if(error){
         return(
             <div>
@@ -38,33 +41,8 @@ function ToDoComponent(){
         <div style={{background:'#E5E5E5', width:'100%'}}>
             <ToDoListBlock>
                 <div>
-
-                    <ToDoList toDos={toDos}/>
+                    <ToDoList toDos={toDos} onDrop={(dragItem)=>handleDrop(dragItem)}/>
                 </div>
-                {/*<div>*/}
-                {/*    <TopBlock>*/}
-                {/*        <Stage>*/}
-                {/*            ЗАДАЧИ НА СЕГОДНЯ*/}
-                {/*        </Stage>*/}
-                {/*        <Len>*/}
-                {/*            {today.length}*/}
-                {/*        </Len>*/}
-                {/*    </TopBlock>*/}
-                {/*    <Horizontal/>*/}
-                {/*    <ToDoList toDos={today}/>*/}
-                {/*</div>*/}
-                {/*<div>*/}
-                {/*    <TopBlock>*/}
-                {/*        <Stage>*/}
-                {/*            ЗАДАЧИ НА ЗАВТРА*/}
-                {/*        </Stage>*/}
-                {/*        <Len>*/}
-                {/*            {tomorrow.length}*/}
-                {/*        </Len>*/}
-                {/*    </TopBlock>*/}
-                {/*    <Horizontal/>*/}
-                {/*    <ToDoList toDos={tomorrow}/>*/}
-                {/*</div>*/}
             </ToDoListBlock>
 
         </div>

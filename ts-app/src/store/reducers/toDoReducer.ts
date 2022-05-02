@@ -1,5 +1,6 @@
 import {Reducer} from "redux";
 import {ToDoActions, ToDoActionTypes, ToDoReducerInitState} from "../../types/toDoTypes";
+import {Product} from "../../types/productTypes";
 
 const initState: ToDoReducerInitState = {
     toDos: [],
@@ -26,6 +27,24 @@ export const toDoReducer:Reducer<ToDoReducerInitState, ToDoActions> = (state=ini
         case ToDoActionTypes.TODO_TOMORROW_LIST:
             const tomorrowList = state.toDos.find((toDo) => toDo.stage === "TOMORROW")?.items
             return {...state, tomorrow: tomorrowList ?? []}
+        case ToDoActionTypes.TODO_DRAG_AND_DROP:
+            const newStage = action.payload.newStage
+            const currentStage = action.payload.currentStage
+            const toDo = action.payload.toDo
+            state.toDos.map((column)=>{
+                if(column.stage === newStage) {
+                    column.items = [...column.items, toDo]
+                }
+                if(column.stage === currentStage) {
+                    column.items =  column.items.filter((item:any) =>
+                        item.taskId !== toDo.taskId
+                    )
+                }
+            })
+            // console.log(newTodos)
+            // const newState = {...newState, toDos: toDos.}
+            return {...state}
+
         default:
             return state;
     }

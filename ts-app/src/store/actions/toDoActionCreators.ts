@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {Dispatch} from 'redux'
-import {ToDoActionTypes, ToDoTypes} from "../../types/toDoTypes";
+import {DragItem, ToDoActionTypes, ToDoFetched, ToDoTypes} from "../../types/toDoTypes";
 
 
 export const fetchToDoList = () => (dispatch:Dispatch<any>) => {
@@ -16,3 +16,8 @@ export const fetchToDoList = () => (dispatch:Dispatch<any>) => {
             dispatch({type:ToDoActionTypes.TODO_FETCH_ERROR, payload: e})
         })
 }
+
+export const onDragAndDrop = ( dragItem: DragItem) => (dispatch:Dispatch<any>) => {
+    dispatch({type: ToDoActionTypes.TODO_DRAG_AND_DROP, payload: dragItem})
+}
+
