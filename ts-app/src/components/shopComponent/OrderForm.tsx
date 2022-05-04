@@ -14,6 +14,13 @@ import { getFieldState } from "../../utils/getFieldstate";
 import { ValidatePhoneNumber } from "../../utils/validatePhoneNumber";
 import { validateEmail } from "../../utils/validateEmail";
 
+export type OrderDataType = {
+    name: string,
+    phone: string,
+    email: string,
+    comment: string,
+    city: string | undefined,
+}
 const StyledDialog = styled(Dialog)`
   overflow-y: hidden;
   display: flex;
@@ -24,7 +31,7 @@ const StyledDialog = styled(Dialog)`
 
 export function OrderForm() {
     const { orderModalState } = useTypedSelector((state) => state.product)
-    const { handleSubmit, reset, control } = useForm({
+    const { handleSubmit, reset, control } = useForm<OrderDataType>({
         mode: 'onChange',
         defaultValues: {
             name: '',
@@ -47,7 +54,7 @@ export function OrderForm() {
         alert("Submitted")
         reset()
         handleClose();
-    }, [reset])
+    }, [reset, handleClose])
     return (
         <div>
             <Button
@@ -101,7 +108,9 @@ export function OrderForm() {
                                 render={({ field, fieldState, formState }) => (
                                     <TextField label="Phone"
                                         required
+                                        type="number"
                                         focused
+                                        id="outlined-basic"
                                         {...getFieldState({ formState, fieldState })}
                                         variant="outlined" {...field} />
                                 )}
@@ -150,7 +159,6 @@ export function OrderForm() {
                                         multiline
                                         rows={2}
                                         {...getFieldState({ formState, fieldState })}
-
                                         {...field}
                                     />
                                 )}
@@ -174,13 +182,12 @@ export function OrderForm() {
                             />
                         </FormControl>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <Button variant='outlined' type='submit'>Order</Button>
+                            <Button variant='contained' type='submit'>Order</Button>
                             <Button variant='contained' onClick={() => handleClose()}>Close</Button>
                         </div>
                     </DialogContent>
                 </form>
             </StyledDialog>
-
         </div>
     )
 }
