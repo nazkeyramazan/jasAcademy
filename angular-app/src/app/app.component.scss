@@ -1,0 +1,11 @@
+.bad{
+  //display: flex;
+  //flex-wrap: wrap;
+  //margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.app{
+  background: #3b3b3b;
+  margin:auto
+}

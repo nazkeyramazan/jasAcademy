@@ -1,13 +1,13 @@
-import React, {useState, useCallback, useMemo, FC} from 'react'
-import {Button, styled} from "@mui/material";
+import React, { useState, useCallback, useMemo, FC } from 'react'
+import { Badge, Box, Button, Modal, styled, Typography } from "@mui/material";
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import RemoveIcon from '@mui/icons-material/Remove';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import AddIcon from '@mui/icons-material/Add';
-import {Product} from "../../types/productTypes";
-import {useProductActions} from "../../hooks/useProductActions";
+import { Product } from "../../types/productTypes";
+import { useProductActions } from "../../hooks/useProductActions";
 
 const Wrapper = styled('div')`
   position: absolute;
@@ -84,7 +84,7 @@ const BasketBottomBlock = styled('div')`
     justify-content: space-between;
     align-items: center;
 `
-const BasketTopBlock= styled('div')`
+const BasketTopBlock = styled('div')`
   margin-top: 24px;
   margin-bottom: 4px;
   font-size: 24px;
@@ -118,20 +118,33 @@ const ClearButton = styled(Button)`
     border: none;
   }
 `
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+}
 type Props = {
     product: Product,
     handleRemoveItem: any,
     handleAddItem: any
 }
-const BasketItem :FC<Props> = ({product , handleRemoveItem, handleAddItem}) => {
+const BasketItem: FC<Props> = ({ product, handleRemoveItem, handleAddItem }) => {
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
     return (
         <Item>
-
             <BasketItemTopBlock >
-                <ImageInBasket src={product.image}  alt=''/>
+                <ImageInBasket src={product.image} alt='' />
                 {product.title}
             </BasketItemTopBlock>
-            <HorizontalLine/>
+            <HorizontalLine />
             <BasketItemBottomBlock>
                 <LeftSide>
                     <b>
@@ -139,14 +152,44 @@ const BasketItem :FC<Props> = ({product , handleRemoveItem, handleAddItem}) => {
                     </b>
                 </LeftSide>
                 <RightSide>
-                    <RemoveIcon style={{cursor:'pointer', backgroundColor: 'rgb(243, 243, 247)', borderRadius:'40%'}}
-                        onClick={(e)=>{
-                        handleRemoveItem(product.id)
-                        e.stopPropagation();
-                    }}/>
-
+                    {product.cnt === 1 ? (
+                        <div>
+                            <RemoveIcon style={{ cursor: 'pointer', backgroundColor: 'rgb(243, 243, 247)', borderRadius: '40%' }}
+                                onClick={(e) => {
+                                    handleOpen();
+                                    e.stopPropagation();
+                                }} />
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            ><Box sx={style}>
+                                    <Typography id="modal-modal-title" variant="h5" component="h2">
+                                        Продукт удалится с вашей корзины.
+                                        Вы действительно хотите удалить?
+                                    </Typography>
+                                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                        <img
+                                            style={{ objectFit: "contain", width: "64px", height: "64px", flex: "0 0 auto", marginRight: "16px", }}
+                                            src={product.image}
+                                        />
+                                        {product.title} - {product.price}$
+                                    </Typography>
+                                    <Button onClick={() => handleRemoveItem(product.id)}>Да</Button>
+                                    <Button onClick={(handleClose)}>Нет</Button>
+                                </Box>
+                            </Modal>
+                        </div>
+                    ) : (
+                        <RemoveIcon style={{ cursor: 'pointer', backgroundColor: 'rgb(243, 243, 247)', borderRadius: '40%' }}
+                            onClick={(e) => {
+                                handleRemoveItem(product.id)
+                                e.stopPropagation();
+                            }} />
+                    )}
                     <b> {product.cnt}</b>
-                    <AddIcon style={{cursor:'pointer', backgroundColor: 'rgb(243, 243, 247)', borderRadius:'40%'}} onClick={(e)=>{
+                    <AddIcon style={{ cursor: 'pointer', backgroundColor: 'rgb(243, 243, 247)', borderRadius: '40%' }} onClick={(e) => {
                         handleAddItem(product)
                         e.stopPropagation();
                     }} />
@@ -156,7 +199,7 @@ const BasketItem :FC<Props> = ({product , handleRemoveItem, handleAddItem}) => {
         </Item>
     )
 }
-export function Basket(){
+export function Basket() {
     const [open, setOpen] = useState<boolean>(false)
     const { basket } = useTypedSelector((state) => state.product)
     const { removeFromBasket, addToBasket, clearBasket } = useProductActions()
@@ -167,72 +210,74 @@ export function Basket(){
     const closeBasket = () => {
         setOpen(false)
     }
-    const  handleRemoveItem = useCallback((id:number) =>{
+    const handleRemoveItem = useCallback((id: number) => {
         removeFromBasket(id)
     }, [removeFromBasket])
 
-    const handleAddItem = useCallback((product:Product) => {
+    const handleAddItem = useCallback((product: Product) => {
         addToBasket(product)
     }, [addToBasket])
 
-    const handleClearBasket = useCallback(()=>{
+    const handleClearBasket = useCallback(() => {
         clearBasket()
     }, [clearBasket])
-    const productCount = useMemo(()=>{
-        return basket !==[] ? basket.map((item:any)=>{
+    const productCount = useMemo(() => {
+        return basket !== [] ? basket.map((item: any) => {
             return item.cnt
-        }).reduce((acc:number , item:number)=> acc + item ,0
+        }).reduce((acc: number, item: number) => acc + item, 0
         ) : 0;
     }, [basket])
-    const sum = useMemo(()=>{
-        return basket !==[] ? basket.map((item:any)=>{
-            if(item.cnt !== undefined) {
-                return Math.round(parseInt(item.price)*100)/100 * Math.round(item.cnt*100)/100
-            }return 1
-        }).reduce((acc:number, item:number)=> acc + item ,0
+    const sum = useMemo(() => {
+        return basket !== [] ? basket.map((item: any) => {
+            if (item.cnt !== undefined) {
+                return Math.round(parseInt(item.price) * 100) / 100 * Math.round(item.cnt * 100) / 100
+            } return 1
+        }).reduce((acc: number, item: number) => acc + item, 0
         ) : 0;
     }, [basket]);
 
-    const {openOrderModal} = useProductActions()
-    const handleClickOpen = useCallback(()=>{
+    const { openOrderModal } = useProductActions()
+    const handleClickOpen = useCallback(() => {
         openOrderModal()
     }, [openOrderModal])
-    return(
+    return (
         <Wrapper>
-            <Button onClick={openBasket}>
-                <ShoppingCartIcon/>
-            </Button>
+            <Badge badgeContent={productCount} color="primary">
+                <Button onClick={openBasket}>
+                    <ShoppingCartIcon />
+                </Button>
+            </Badge>
             <SwipeableDrawer
                 anchor={"right"}
                 open={open}
                 onClose={closeBasket}
                 onOpen={openBasket}
             >
-                    {basket.length === 0 ?
-                        <img src={emptyCart} alt=""/>
-                        :
-                        <BasketContainer>
-                            <BasketTopBlock>
-                                <h4 title="Total cost"> {productCount} товара на сумму {sum}$</h4>
-                            </BasketTopBlock>
-                            {basket.map((product:Product, index:number) => (
-                                <BasketItem product={product} key={index} handleRemoveItem={handleRemoveItem}  handleAddItem={handleAddItem}/>
+                {basket.length === 0 ?
+                    <img src={emptyCart} alt="" />
+                    :
+                    <BasketContainer>
+                        <BasketTopBlock>
+                            <h4 title="Total cost"> {productCount} товара на сумму {sum}$</h4>
+                        </BasketTopBlock>
+                        {basket.map((product: Product, index: number) => (
+                            <BasketItem product={product} key={index} handleRemoveItem={handleRemoveItem} handleAddItem={handleAddItem} />
 
-                            ))}
-                            <BasketBottomBlock>
-                                <OrderButton variant="outlined" onClick={handleClickOpen}>Оформить заказ</OrderButton>
-                                <ClearButton title="Очистить корзину"
-                                     onClick={(e)=>{
-                                        e.stopPropagation()
-                                        handleClearBasket()
+                        ))}
+                        <BasketBottomBlock>
+                            <OrderButton variant="outlined" onClick={handleClickOpen}>Оформить заказ</OrderButton>
+                            <ClearButton title="Очистить корзину"
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleClearBasket()
                                 }}>
-                                    <ClearAllIcon/>
-                                    Очистить
-                                </ClearButton>
+                                <ClearAllIcon />
+                                Очистить
+                            </ClearButton>
 
-                            </BasketBottomBlock>
-                        </BasketContainer>
-                    }
+                        </BasketBottomBlock>
+                    </BasketContainer>
+                }
             </SwipeableDrawer>
 
         </Wrapper>

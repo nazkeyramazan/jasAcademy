@@ -1,1 +1,36 @@
-<p>code-block works!</p>
+
+<div class="main" *ngFor="let item of data">
+  <div class="item">
+
+  <img class="char_img" src={{item.img}} alt=""/>
+    <div class="bottomBlock">
+      <p class="name">{{item.name}}</p>
+      <div class="nickname">
+        <img class="bee_logo" src="https://images-na.ssl-images-amazon.com/images/I/31NhsG8XFpL._SX425_.jpg" alt="">
+        <p class="name">{{item.nickname}}</p>
+      </div>
+      <div class="status" *ngIf="item.status === 'Alive'" >
+        <p class="name">Status: </p> <img class="bee_logo" title="Alive" src="https://cdn2.iconfinder.com/data/icons/sports-solid-icons-vol-1-1/64/030-512.png" alt="">
+      </div>
+      <div class="status" *ngIf="item.status === 'Presumed dead'" >
+        <p class="name">Status: </p> <img class="bee_logo" title="Presumed dead" src="https://cdn-icons-png.flaticon.com/512/135/135936.png" alt="">
+      </div>
+      <div class="status" *ngIf="item.status === 'Deceased'"  >
+        <p class="name">Status: </p> <img class="bee_logo" title="Deceased" src="https://img.favpng.com/23/25/19/death-clipart-png-icon-png-favpng-FVs8CPWSbZWJ7b3Gnz3XdfM0a.jpg" alt="">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div class="pagination">
+  <mat-paginator
+    [length]="length"
+    [pageIndex]="currentPage"
+    [pageSizeOptions]="[limit]"
+    aria-label="Select page"
+    (page)="paginate($event)"
+  >
+  </mat-paginator>
+</div>
+

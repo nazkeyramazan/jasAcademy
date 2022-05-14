@@ -4,16 +4,23 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import {useCallback} from "react";
-import {Select, styled, TextField} from "@mui/material";
+import { useCallback } from "react";
+import { Select, styled, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useProductActions} from "../../hooks/useProductActions";
-import {useForm, Controller} from "react-hook-form";
-import {getFieldState} from "../../utils/getFieldstate";
-import {ValidatePhoneNumber} from "../../utils/validatePhoneNumber";
-import {validateEmail} from "../../utils/validateEmail";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useProductActions } from "../../hooks/useProductActions";
+import { useForm, Controller } from "react-hook-form";
+import { getFieldState } from "../../utils/getFieldstate";
+import { ValidatePhoneNumber } from "../../utils/validatePhoneNumber";
+import { validateEmail } from "../../utils/validateEmail";
 
+export type OrderDataType = {
+    name: string,
+    phone: string,
+    email: string,
+    comment: string,
+    city: string | undefined,
+}
 const StyledDialog = styled(Dialog)`
   overflow-y: hidden;
   display: flex;
@@ -22,12 +29,12 @@ const StyledDialog = styled(Dialog)`
   margin: auto;
 `
 
-export function OrderForm(){
-    const {orderModalState} = useTypedSelector((state)=>state.product)
-    const {handleSubmit, reset, control} = useForm({
+export function OrderForm() {
+    const { orderModalState } = useTypedSelector((state) => state.product)
+    const { handleSubmit, reset, control } = useForm<OrderDataType>({
         mode: 'onChange',
         defaultValues: {
-            name:'',
+            name: '',
             phone: '',
             email: '',
             comment: '',
@@ -35,23 +42,23 @@ export function OrderForm(){
         }
     })
 
-    const {openOrderModal, closeOrderModal} = useProductActions()
-    const handleClickOpen = useCallback(()=>{
+    const { openOrderModal, closeOrderModal } = useProductActions()
+    const handleClickOpen = useCallback(() => {
         openOrderModal()
     }, [openOrderModal])
-    const handleClose = useCallback(()=>{
+    const handleClose = useCallback(() => {
         closeOrderModal()
     }, [closeOrderModal])
 
-    const  onSubmit = useCallback(()=>{
+    const onSubmit = useCallback(() => {
         alert("Submitted")
         reset()
         handleClose();
-    },[reset])
-    return(
+    }, [reset, handleClose])
+    return (
         <div>
             <Button
-                style={{display:'flex', alignItems:'center'}}
+                style={{ display: 'flex', alignItems: 'center' }}
                 onClick={handleClickOpen}
                 variant='outlined'
                 sx={{ my: 2, color: 'blue', display: 'block' }}>
@@ -64,27 +71,27 @@ export function OrderForm(){
 
                     <DialogContent>
 
-                        <FormControl fullWidth sx={{mb:2 }}>
+                        <FormControl fullWidth sx={{ mb: 2 }}>
                             <Controller
                                 name="name"
                                 control={control}
                                 rules={{
                                     required: 'Поле обязательное',
                                     validate: (value => {
-                                        if(value.length<=3)
+                                        if (value.length <= 3)
                                             return 'Должен содержать больше 3 символов'
                                     })
                                 }}
-                                render={({field, fieldState, formState}) => (
+                                render={({ field, fieldState, formState }) => (
                                     <TextField label="Name"
-                                               required
-                                               focused
-                                               {...getFieldState({  formState, fieldState})}
-                                               variant="outlined" {...field} />
+                                        required
+                                        focused
+                                        {...getFieldState({ formState, fieldState })}
+                                        variant="outlined" {...field} />
                                 )}
                             />
                         </FormControl>
-                        <FormControl fullWidth sx={{mb:2  }}>
+                        <FormControl fullWidth sx={{ mb: 2 }}>
                             <Controller
                                 name="phone"
                                 control={control}
@@ -98,16 +105,18 @@ export function OrderForm(){
                                         }
                                     }
                                 }}
-                                render={({field, fieldState, formState}) => (
+                                render={({ field, fieldState, formState }) => (
                                     <TextField label="Phone"
-                                               required
-                                               focused
-                                               {...getFieldState({  formState, fieldState})}
-                                               variant="outlined" {...field} />
+                                        required
+                                        type="number"
+                                        focused
+                                        id="outlined-basic"
+                                        {...getFieldState({ formState, fieldState })}
+                                        variant="outlined" {...field} />
                                 )}
                             />
                         </FormControl>
-                        <FormControl fullWidth sx={{mb: 2}}>
+                        <FormControl fullWidth sx={{ mb: 2 }}>
                             <Controller
                                 name="email"
                                 control={control}
@@ -120,48 +129,47 @@ export function OrderForm(){
                                         }
                                     }
                                 }}
-                                render={({field, formState, fieldState}) => (
+                                render={({ field, formState, fieldState }) => (
                                     <TextField
                                         label="Email"
                                         variant="outlined"
-                                        {...getFieldState({  formState, fieldState})}
+                                        {...getFieldState({ formState, fieldState })}
                                         {...field}
                                     />
                                 )}
                             />
                         </FormControl>
-                        <FormControl fullWidth sx={{mb: 2}}>
+                        <FormControl fullWidth sx={{ mb: 2 }}>
                             <Controller
                                 name="comment"
                                 control={control}
                                 rules={{
-                                    validate: (value:string) => {
-                                        if (value.length>10 || value==='') {
+                                    validate: (value: string) => {
+                                        if (value.length > 10 || value === '') {
                                             return true;
                                         } else {
                                             return 'Длина должна быть не меньше 10 символов'
                                         }
                                     }
                                 }}
-                                render={({field, formState, fieldState}) => (
+                                render={({ field, formState, fieldState }) => (
                                     <TextField
                                         label="Comment"
                                         variant="outlined"
                                         multiline
                                         rows={2}
-                                        {...getFieldState({formState, fieldState})}
-
+                                        {...getFieldState({ formState, fieldState })}
                                         {...field}
                                     />
                                 )}
                             />
                         </FormControl>
-                        <FormControl fullWidth sx={{mb: 2}}>
+                        <FormControl fullWidth sx={{ mb: 2 }}>
                             <InputLabel >City</InputLabel>
                             <Controller
                                 name="city"
                                 control={control}
-                                render={({field}) => (
+                                render={({ field }) => (
                                     <Select
                                         label="City"
                                         {...field}
@@ -173,12 +181,13 @@ export function OrderForm(){
                                 )}
                             />
                         </FormControl>
-
-                        <Button  variant='outlined' type='submit'>Order</Button>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Button variant='contained' type='submit'>Order</Button>
+                            <Button variant='contained' onClick={() => handleClose()}>Close</Button>
+                        </div>
                     </DialogContent>
                 </form>
             </StyledDialog>
-
         </div>
     )
 }
