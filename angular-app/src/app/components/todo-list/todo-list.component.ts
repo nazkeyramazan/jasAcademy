@@ -14,23 +14,26 @@ export class TodoListComponent implements OnInit {
   constructor(private todoService: TodoService) { }
   todo: string = ''
   id: number = 3
-
+  data: Date = new Date()
   ngOnInit(): void {
     this.todos = this.todoService.getTodos()
-
     this.todoService.todosChanged.subscribe((event) => {
       this.todos = event
     })
   }
   onButtonClick(todo:string){
-    this.todoService.addNewTodo({id: this.id, todo:todo, done:false})
+    this.data = new Date()
+    this.todoService.addNewTodo({id: this.id, todo:todo, done:false, created:this.data})
     this.todo = '';
     this.id++
     return
   }
-
+  changeDone(e:boolean, todo:todo){
+    this.todoService.todoDone(e , todo)
+  }
   getTodoDone(todo:todo){
-    this.todoService.todoDone(todo)
+    if (todo.done) return 'line-through'
+    else return ''
   }
 
   deleteTodo(todo:any){
