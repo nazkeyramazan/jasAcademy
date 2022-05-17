@@ -1,34 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import {todo} from '../../types'
+import {TodoService} from "../../services/todo.service";
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss']
+  styleUrls: ['./todo-list.component.scss'],
+  providers: [TodoService]
 })
 
 export class TodoListComponent implements OnInit {
 
-  todos: todo[] = [
-    {id:1, todo:'Buy milk', done: true},
-    {id:2, todo:'Todo item 2', done: false}
-  ]
-  constructor() { }
+  todos: todo[] = []
+  constructor(private todoService: TodoService) { }
   todo: string = ''
   id: number = 3
+
   ngOnInit(): void {
+    this.todos = this.todoService.getTodos()
+
+    this.todoService.todosChanged.subscribe((event) => {
+      this.todos = event
+    })
   }
-  onButtonClick(e:any){
-    this.todos.push({id: this.id, todo: this.todo, done: false});
+  onButtonClick(todo:string){
+    this.todoService.addNewTodo({id: this.id, todo:todo, done:false})
     this.todo = '';
-    this.id++;
+    this.id++
+    return
   }
 
   getTodoDone(todo:todo){
-    if (todo.done) return 'line-through'
-    else return ''
+    this.todoService.todoDone(todo)
   }
 
   deleteTodo(todo:any){
-    this.todos = this.todos.filter(t=>t.id !== todo.id)
+    this.todoService.deleteTodo(todo)
   }
 }
