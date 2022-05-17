@@ -1,0 +1,16 @@
+
+<div class="todo_form">
+  <mat-form-field appearance="fill" >
+    <mat-label>Enter todo</mat-label>
+    <input matInput [(ngModel)]="todo">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onButtonClick($event)" >Add ToDo card</button>
+</div>
+<mat-list style="width: 350px">
+  <mat-list-item id="todo_list" *ngFor="let item of todos; let i = index" [ngStyle]="{'text-decoration-line': getTodoDone(item)}" >{{item.todo}}
+    <mat-checkbox class="todo_item_checkbox" [(ngModel)]="item.done">Done</mat-checkbox>
+    <button mat-mini-fab color="primary" (click)="deleteTodo(item)" aria-label="Example icon button with a delete icon">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>
